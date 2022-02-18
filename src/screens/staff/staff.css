@@ -1,4 +1,3 @@
-
 .frontdesk__dashboard__container {
   width: 100vw;
   height: 100vh;
@@ -50,4 +49,34 @@
   height: inherit;
   border: none;
   font-size: inherit;
+}
+
+/* Prebooked Visitors */
+.viewprebook__container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  grid-gap: 40px;
+}
+
+.data__container {
+  width: 90vw;
+  height: 100vh;
+  position: absolute;
+  left: 15%;
+  padding: 10px;
+  overflow-y: scroll;
+}
+.loader {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

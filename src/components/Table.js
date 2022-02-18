@@ -1,6 +1,6 @@
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
-
+import React from "react";
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Check from "@material-ui/icons/Check";
@@ -42,86 +42,36 @@ const tableIcons = {
 };
 
 function ShowDataTable({ data }) {
+  const [selectedRow, setSelectedRow] = React.useState(null);
   return (
     <MaterialTable
-      title="Basic Tree Data Preview"
-      data={[
-        {
-          id: 1,
-          name: "a",
-          surname: "Baran",
-          birthYear: 1987,
-          birthCity: 63,
-          sex: "Male",
-          type: "adult",
-        },
-        {
-          id: 2,
-          name: "b",
-          surname: "Baran",
-          birthYear: 1987,
-          birthCity: 34,
-          sex: "Female",
-          type: "adult",
-          parentId: 1,
-        },
-        {
-          id: 3,
-          name: "c",
-          surname: "Baran",
-          birthYear: 1987,
-          birthCity: 34,
-          sex: "Female",
-          type: "child",
-          parentId: 1,
-        },
-        {
-          id: 4,
-          name: "d",
-          surname: "Baran",
-          birthYear: 1987,
-          birthCity: 34,
-          sex: "Female",
-          type: "child",
-          parentId: 3,
-        },
-        {
-          id: 5,
-          name: "e",
-          surname: "Baran",
-          birthYear: 1987,
-          birthCity: 34,
-          sex: "Female",
-          type: "child",
-        },
-        {
-          id: 6,
-          name: "f",
-          surname: "Baran",
-          birthYear: 1987,
-          birthCity: 34,
-          sex: "Female",
-          type: "child",
-          parentId: 5,
-        },
-      ]}
+      title="My Pre Booked Guests"
+      data={data}
       columns={[
-        { title: "Adı", field: "name" },
-        { title: "Soyadı", field: "surname" },
-        { title: "Cinsiyet", field: "sex" },
-        { title: "Tipi", field: "type", removable: false },
-        { title: "Doğum Yılı", field: "birthYear", type: "numeric" },
-        {
-          title: "Doğum Yeri",
-          field: "birthCity",
-          lookup: { 34: "İstanbul", 63: "Şanlıurfa" },
-        },
+        { title: "Full Name", field: "fullname" },
+        { title: "Email Address", field: "email" },
+        { title: "Expected Date", field: "date" },
+        { title: "Expected Time", field: "time", removable: false },
+        { title: "Purpose", field: "purpose" },
       ]}
-      parentChildData={(row, rows) => rows.find((a) => a.id === row.parentId)}
+      onRowClick={(evt, selectedRow) =>
+        setSelectedRow(selectedRow.tableData.id)
+      }
       options={{
-        selection: true,
+        exportButton: true,
+        rowStyle: (rowData) => ({
+          backgroundColor:
+            selectedRow === rowData.tableData.id ? "#f17230" : "#FFF",
+          color: selectedRow === rowData.tableData.id ? "#fff" : "#000",
+        }),
       }}
       icons={tableIcons}
+      style={{
+        color: "#000",
+        fontFamily: "inherit",
+        padding: "10px",
+        width: "95%",
+      }}
     />
   );
 }

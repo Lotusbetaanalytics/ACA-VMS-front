@@ -1,40 +1,40 @@
 import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
-// import { Button } from "semantic-ui-react";
-// import PageTitle from "../../components/PageTitle/Pagetitle";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Navbar from "../../components/Navbar/Navbar";
 import { handleChange } from "./prebook.events";
 import "./prebook.css";
-import { Button } from "@chakra-ui/react";
-// import Alerts from "../../components/Alerts/Alert";
-// import { preBookGuest } from "../../redux/actions/prebookActions/prebook.actions";
-// import { getDashboard } from "../../redux/actions/dashboardActions/dashboard.actions";
-// import { PRE_BOOK_GUEST_RESET } from "../../redux/constants";
+import { Button, useToast } from "@chakra-ui/react";
+import { prebookGuest } from "../../redux/actions/staff/staff.prebook";
 
 const Prebook = () => {
-  const [name, setName] = useState("");
-  const [msg, setMsg] = useState(false);
+  const [fullname, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhone] = useState("");
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
   const [purpose, setPurpose] = useState("");
-  // const prebook = useSelector((state) => state.preBookReducer); //get the state of the elements in this component
-  // const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
-  // if (prebook.success) {
-  //   dispatch(getDashboard());
-  //   dispatch({ type: PRE_BOOK_GUEST_RESET });
-  //   setMsg(true);
-  // }
+  const toast = useToast();
 
-  const handleSubmit = (event, ...state) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-
+    const data = {
+      fullname,
+      time,
+      date,
+      purpose,
+      company,
+      email,
+      mobile: phoneNumber,
+    };
+    setLoading(true);
+    dispatch(prebookGuest(data, setLoading, toast));
     setTime(time);
-    // dispatch(preBookGuest(...state));
     setName("");
     setDate("");
     setTime("");
@@ -53,52 +53,17 @@ const Prebook = () => {
         <div className="prebook__pagetitle">
           {/* <PageTitle heading="Prebook a Guest" /> */}
         </div>
-        <div
-          className="alerts"
-          style={{
-            width: "60%",
-            position: "relative",
-            left: "100px",
-            top: "30px",
-          }}
-        >
-          {/*   {prebook.error ? (
-            <Alerts
-              message="An error occured! Please try again."
-              type="error"
-            />
-          ) : (
-            ""
-          )}
-          {msg ? (
-            <Alerts message="Guest Pre Booked!" type="success" show={msg} />
-          ) : (
-            ""
-          )} */}
-        </div>
-
         <form
           className="inputfields"
           noValidate
           autoComplete="off"
-          onSubmit={(e) => {
-            handleSubmit(
-              e,
-              name,
-              email,
-              phoneNumber,
-              purpose,
-              company,
-              date,
-              time
-            );
-          }}
+          onSubmit={handleSubmit}
         >
           <div className="date__time">
             <label htmlFor="name">Guest Name</label>
             <TextField
               id="name"
-              value={name}
+              value={fullname}
               placeholder="Guest Name"
               variant="outlined"
               type="text"
@@ -175,18 +140,11 @@ const Prebook = () => {
             <Button
               colorScheme="green"
               disabled={
-                name &&
-                email &&
-                company &&
-                date &&
-                time &&
-                phoneNumber &&
-                purpose
-                  ? false
-                  : true
+                fullname && email && date && time && purpose ? false : true
               }
               type="submit"
-              // loading={prebook.loading}
+              isLoading={loading}
+              loadingText="Submitting..."
               style={{ marginTop: "25px", padding: "26px" }}
             >
               Pre Book Guest
