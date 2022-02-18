@@ -1,0 +1,108 @@
+.frontdesk__login__container {
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  /* background: url(../../assets/reception.jpg) no-repeat center center fixed;
+  background-size: cover;
+  background-position: left; */
+  background: rgb(241, 238, 238);
+}
+
+.login__container {
+  width: 40vw;
+  height: 80vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 4px 3px 10px 1px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login__container__image {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__container form {
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 30px;
+  padding: 30px;
+}
+
+.login__container h1 {
+  font-size: 3rem;
+  padding-right: 3rem;
+  height: 20%;
+  width: 100%;
+  line-height: 45px;
+  font-weight: bold;
+}
+
+/* Front Desk Dashboard */
+
+.frontdesk__dashboard__container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  grid-gap: 40px;
+}
+
+.dashboard__content {
+  width: 90vw;
+  height: 100vh;
+  position: absolute;
+  left: 15%;
+  padding: 20px;
+}
+.dashboard__content h2 {
+  font-size: 20px;
+  padding: 10px;
+  width: 40%;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.dashboard__smallcards {
+  display: grid;
+  grid-template-columns: 350px 350px 350px;
+  padding: 10px;
+  grid-gap: 10px;
+}
+
+.header__details {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
+
+.filter__date {
+  width: 15%;
+  margin-right: 100px;
+}
+.filter__date select {
+  font-size: 16px;
+  width: 100%;
+}
+.filter__date select option {
+  width: inherit;
+  height: inherit;
+  border: none;
+  font-size: inherit;
+}

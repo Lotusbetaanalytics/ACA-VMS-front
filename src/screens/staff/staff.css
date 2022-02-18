@@ -1,0 +1,53 @@
+
+.frontdesk__dashboard__container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  grid-gap: 40px;
+}
+
+.dashboard__content {
+  width: 90vw;
+  height: 100vh;
+  position: absolute;
+  left: 15%;
+  padding: 20px;
+}
+.dashboard__content h2 {
+  font-size: 20px;
+  padding: 10px;
+  width: 40%;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.dashboard__smallcards {
+  display: grid;
+  grid-template-columns: 350px 350px 350px;
+  padding: 10px;
+  grid-gap: 10px;
+}
+
+.header__details {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
+
+.filter__date {
+  width: 15%;
+  margin-right: 100px;
+}
+.filter__date select {
+  font-size: 16px;
+  width: 100%;
+}
+.filter__date select option {
+  width: inherit;
+  height: inherit;
+  border: none;
+  font-size: inherit;
+}

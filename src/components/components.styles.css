@@ -1,0 +1,22 @@
+/* Cards */
+
+.smallcard__container {
+  width: 330px;
+  height: 110px;
+  background: #fff;
+  box-shadow: 4px 5px 40px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 4px;
+  grid-gap: 5px;
+}
+.smallcard__container h1 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #f17230;
+}
+.smallcard__container h3 {
+  font-size: 13px;
+}
