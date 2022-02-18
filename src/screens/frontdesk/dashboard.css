@@ -7,9 +7,17 @@
 .dashboard__container {
   display: flex;
   flex-direction: column;
-  width: 80vw;
+  width: 100%;
   height: 100%;
   margin-left: 210px;
+  background: rgb(0, 124, 100);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 124, 100, 1) 0%,
+    rgba(0, 124, 100, 1) 35%,
+    rgba(241, 114, 48, 1) 100%
+  );
+  color: #fff;
 }
 
 .dashboard__title__cards {
@@ -19,7 +27,7 @@
 
 .cards {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 270px 270px 270px 270px;
   grid-gap: 8px;
   padding: 8px;
   width: 100%;

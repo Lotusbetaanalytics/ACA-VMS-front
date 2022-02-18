@@ -14,7 +14,9 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.0",
+    "chart.js": "^3.7.1",
     "framer-motion": "^6.2.6",
+    "lodash": "^4.17.21",
     "material-table": "^1.69.3",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.1",
@@ -25,6 +27,8 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "redux": "^4.1.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
