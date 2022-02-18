@@ -17,14 +17,13 @@ const GuestScreen = () => {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <p>one!</p>
               <NewGuest />
             </TabPanel>
             <TabPanel>
               <p>two!</p>
             </TabPanel>
             <TabPanel>
-              <p>two!</p>
+              <p>three!</p>
             </TabPanel>
           </TabPanels>
         </Tabs>
