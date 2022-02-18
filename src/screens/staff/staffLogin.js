@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { startStaffLogin } from "../../redux/actions/staff/staff.auth.action";
+import Header from "../../components/Header";
 
 const StaffLogin = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const StaffLogin = () => {
 
   return (
     <div className="frontdesk__login__container">
+      <Header />
       <div className="login__container">
         {/* <div className="login__container__image">
           <img src={reception} alt="" />
