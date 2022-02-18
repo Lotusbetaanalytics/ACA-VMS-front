@@ -1,0 +1,12 @@
+.guestscreen__container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.guestscreen__content {
+  /* width: ; */
+  height: 100%;
+  position: absolute;
+  left: 15%;
+  padding: 20px;
+}

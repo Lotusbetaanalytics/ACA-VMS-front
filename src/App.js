@@ -6,6 +6,7 @@ import StaffDashboard from "./screens/staff/StaffDashboard";
 import StaffLogin from "./screens/staff/staffLogin";
 import Prebook from "./screens/prebook/prebook";
 import ViewPreBookedGuest from "./screens/staff/viewPreBooked";
+import GuestScreen from "./screens/GuestScreen";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/" element={<FrontDeskLogin />} />
+            <Route exact path="/frontdesk/guest" element={<GuestScreen />} />
             <Route
               exact
               path="/frontdesk/dashboard"

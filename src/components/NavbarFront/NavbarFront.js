@@ -105,16 +105,16 @@ const NavbarFront = () => {
           <img src={logo} alt="ACA" />
         </div>
         <div className="navbar__links">
-          <Link to="/admin/dashboard" className="links__dashboard">
+          <Link to="/frontdesk/dashboard" className="links__dashboard">
             <div className="link">
               <AiFillAppstore />
               <h3>Dashboard</h3>
             </div>
           </Link>
-          <Link to="/admin/dashboard" className="links__guest">
+          <Link to="/frontdesk/guest" className="links__guest">
             <div className="link">
               <AiOutlineUserSwitch />
-              <h3>Verify Guest</h3>
+              <h3>Guest</h3>
             </div>
           </Link>
 
@@ -228,7 +228,6 @@ const NavbarFront = () => {
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
