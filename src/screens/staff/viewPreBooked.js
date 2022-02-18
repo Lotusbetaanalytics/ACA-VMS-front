@@ -13,6 +13,7 @@ const ViewPreBookedGuest = () => {
     setLoading(true);
     dispatch(getStaffPreBooks(setLoading, setData));
   }, [dispatch]);
+
   return (
     <div className="viewprebook__container">
       <Navbar />
