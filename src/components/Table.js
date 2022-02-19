@@ -64,6 +64,18 @@ function ShowDataTable({ data }) {
             selectedRow === rowData.tableData.id ? "#f17230" : "#FFF",
           color: selectedRow === rowData.tableData.id ? "#fff" : "#000",
         }),
+        detailPanelColumnStyle: {
+          backgroundColor: "#f17230",
+          width: "100%",
+          height: "100%",
+          border: "1px solid #f17230",
+        },
+        headerStyle: {
+          backgroundColor: "#009c84",
+          width: "100%",
+          height: "100%",
+          color: "#fff",
+        },
       }}
       icons={tableIcons}
       style={{

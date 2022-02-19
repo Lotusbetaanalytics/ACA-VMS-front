@@ -15,12 +15,14 @@ const FrontDeskLogin = () => {
   const state = useSelector((state) => state.frontDesk);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const toast = useToast();
   const dispatch = useDispatch();
   const submitHandler = async (e) => {
     e.preventDefault();
     const data = { email, password };
-    dispatch(startLogin(data, toast, navigate));
+    setLoading(true);
+    dispatch(startLogin(data, toast, navigate, setLoading));
     setEmail("");
     setPassword("");
   };
@@ -64,7 +66,7 @@ const FrontDeskLogin = () => {
               colorScheme="teal"
               variant="solid"
               width="410px"
-              isLoading={state.isLoading}
+              isLoading={loading}
               loadingText="Logging in..."
               type="submit"
               isDisabled={password && email?.length > 0 ? false : true}

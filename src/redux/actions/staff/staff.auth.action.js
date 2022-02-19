@@ -7,7 +7,7 @@ import {
   ADD_USER_FAIL,
 } from "../../constants/constants";
 const BASE_URL = "http://localhost:4000/api/v1/staff";
-export const startStaffLogin = (data, toast, navigate) => {
+export const startStaffLogin = (data, toast, navigate, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
@@ -27,7 +27,7 @@ export const startStaffLogin = (data, toast, navigate) => {
         type: STAFF_LOGIN_SUCCESS,
         payload: res.data,
       });
-
+      setLoading(false);
       localStorage.setItem("staff", JSON.stringify(res.data));
       navigate("/staff/dashboard");
     } catch (err) {
@@ -35,9 +35,10 @@ export const startStaffLogin = (data, toast, navigate) => {
         type: STAFF_LOGIN_FAIL,
         payload: err.message || err.response.data.message,
       });
+      setLoading(false);
       toast({
         title: "An error Occured!",
-        description: `${err.response.data.message}`,
+        description: `${err.message || err.response.data.message}`,
         status: "error",
         duration: 9000,
         isClosable: true,
