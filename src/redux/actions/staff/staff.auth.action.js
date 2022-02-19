@@ -5,6 +5,8 @@ import {
   STAFF_LOGIN_FAIL,
   ADD_USER_SUCCESS,
   ADD_USER_FAIL,
+  FIND_STAFF,
+  FIND_STAFF_FAIL,
 } from "../../constants/constants";
 const BASE_URL = "http://localhost:4000/api/v1/staff";
 export const startStaffLogin = (data, toast, navigate, setLoading) => {
@@ -87,6 +89,32 @@ export const addStaff = (data, toast, setLoading) => {
         duration: 9000,
         isClosable: true,
         position: "top-right",
+      });
+    }
+  };
+};
+
+export const findStaff = (search, setSearch) => {
+  return async (dispatch) => {
+    const config = {
+      method: "get",
+      url: `${BASE_URL}/?q=${search}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios(config);
+      setSearch(res.data.data);
+      dispatch({
+        type: FIND_STAFF,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: FIND_STAFF_FAIL,
+        payload: err.message || err.response.data.message,
       });
     }
   };

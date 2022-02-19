@@ -39,3 +39,15 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
 }
+
+.visitor__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.visitor__photo img {
+  width: 40%;
+  /* height: 50%; */
+  border-radius: 10px;
+}

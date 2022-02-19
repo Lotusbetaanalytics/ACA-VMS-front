@@ -55,6 +55,12 @@ const Navbar = () => {
             <h3>My Checked In Guests</h3>
           </div>
         </Link>
+        <Link to="/staff/guest" className="links__prebook">
+          <div className="link">
+            <AiOutlineTeam />
+            <h3>My Guests</h3>
+          </div>
+        </Link>
         <button onClick={logoutHandler} className="links__logout">
           <div className="link">
             <FaSignOutAlt />

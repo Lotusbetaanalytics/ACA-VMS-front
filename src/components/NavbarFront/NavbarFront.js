@@ -164,6 +164,7 @@ const NavbarFront = () => {
                 <Input
                   placeholder="Type fullname..."
                   value={fullname}
+                  required
                   onChange={(e) => {
                     setFullName(e.target.value);
                   }}
@@ -173,6 +174,7 @@ const NavbarFront = () => {
                 <label htmlFor="">Staff Email Address</label>
                 <Input
                   placeholder="Type email address..."
+                  required
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -195,6 +197,7 @@ const NavbarFront = () => {
                   placeholder="Type password..."
                   type="password"
                   value={password}
+                  required
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
@@ -206,8 +209,9 @@ const NavbarFront = () => {
                   placeholder="Choose office..."
                   value={item}
                   onChange={onChangeHandler}
+                  required
                 />
-                {office}
+                {item ? office : ""}
               </div>
               <div style={{ marginTop: "10px" }}>
                 <Button
