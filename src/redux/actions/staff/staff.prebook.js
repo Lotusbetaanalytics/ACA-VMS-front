@@ -6,10 +6,10 @@ import {
   START_GET_STAFF_PREBOOK,
   STAFF_DELETE_PREBOOK_FAIL,
   STAFF_DELETE_PREBOOK_SUCCESS,
+  BASE_URL,
 } from "../../constants/constants";
 
 import axios from "axios";
-const BASE_URL = "http://localhost:4000/api/v1";
 
 export const getStaffPreBooks = (setLoading, setData) => {
   return async (dispatch) => {

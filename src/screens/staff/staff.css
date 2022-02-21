@@ -1,26 +1,22 @@
-.frontdesk__dashboard__container {
+.staff__dashboard__container {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   background: #fff;
   display: flex;
   grid-gap: 40px;
+  border: 1px solid red;
 }
 
-.dashboard__content {
-  width: 90vw;
-  height: 100vh;
+.staff__dashboard__content {
+  width: 90%;
   position: absolute;
+  top: 10%;
   left: 15%;
   padding: 20px;
-  background: rgb(0, 124, 100);
-  background: linear-gradient(
-    86deg,
-    rgba(0, 124, 100, 1) 0%,
-    rgba(0, 124, 100, 1) 30%,
-    rgba(241, 114, 48, 1) 88%
-  );
-  color: #fff;
+  background: #fff;
+  color: #000;
+  overflow-y: scroll;
+  height: 85%;
 }
 .dashboard__content h2 {
   font-size: 20px;
@@ -32,9 +28,10 @@
 
 .dashboard__smallcards {
   display: grid;
-  grid-template-columns: 350px 350px 350px;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 10px;
-  grid-gap: 10px;
+  width: 90%;
+  /* grid-gap: 10px; */
   color: #000;
 }
 
@@ -95,11 +92,13 @@
 .staff__guest_container {
   width: 100vw;
   height: 100vh;
+  padding-top: 40px;
 }
 
 .staff__guest__contents {
-  position: absolute;
+  position: fixed;
   left: 15%;
+  /* top: 13%; */
   width: 80vw;
   height: 100vh;
   padding: 20px;

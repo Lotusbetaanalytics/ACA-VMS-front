@@ -19,8 +19,11 @@ import { findStaff } from "../redux/actions/staff/staff.auth.action";
 import { useDispatch } from "react-redux";
 import { addGuest } from "../redux/actions/guest/guest.actions";
 import { getOffice } from "../redux/actions/office/office.actions";
+import FilterOffice from "../components/AutoCompleteOffice";
+import AutoCompleteContext from "../context/AutoCompleteContext";
 
 const NewGuest = () => {
+  const { value, setValue } = React.useContext(AutoCompleteContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [photo, setPhoto] = React.useState("");
   const [staffId, setStaffId] = React.useState("");
@@ -36,7 +39,7 @@ const NewGuest = () => {
   const [staffSearch, setStaffSearch] = React.useState([]);
   const [officeSearch, setOfficeSearch] = React.useState([]);
   const [res, setRes] = React.useState("");
-  const [officeRes, setOfficeRes] = React.useState("");
+  // const [officeRes, setOfficeRes] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -63,7 +66,7 @@ const NewGuest = () => {
       title,
       company,
       purpose,
-      office,
+      office: value,
       isGroup,
       photo,
     };
@@ -79,6 +82,7 @@ const NewGuest = () => {
     setPhoto("");
     setStaffId("");
     setStaffName("");
+    setValue("");
   };
 
   React.useEffect(() => {
@@ -91,6 +95,7 @@ const NewGuest = () => {
                 e.preventDefault();
                 setStaffId(_id);
                 setStaffName(fullname);
+                setRes("");
               }}
               style={{
                 backgroundColor: "#ccc",
@@ -110,32 +115,36 @@ const NewGuest = () => {
     );
   }, [staffSearch]);
 
-  React.useEffect(() => {
-    setOfficeRes(
-      officeSearch.map(({ _id, office }) => {
-        return (
-          <div key={_id}>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                console.log(office);
-                setOffice(office);
-              }}
-              style={{
-                backgroundColor: "#ccc",
-                padding: "10px",
-                width: "100%",
-                textAlign: "left",
-                marginTop: "10px",
-              }}
-            >
-              {office.toUpperCase()}
-            </button>
-          </div>
-        );
-      })
-    );
-  }, [officeSearch]);
+  // React.useEffect(() => {
+  //   setOfficeRes(
+  //     officeSearch.map(({ _id, office }) => {
+  //       return (
+  //         <div key={_id} style={{ overflowY: "scroll", height: "200px" }}>
+  //           <button
+  //             onClick={(e) => {
+  //               e.preventDefault();
+  //               setOffice(office);
+  //               setOfficeRes("");
+  //             }}
+  //             style={{
+  //               backgroundColor: "#ccc",
+  //               padding: "10px",
+  //               width: "100%",
+  //               textAlign: "left",
+  //               marginTop: "10px",
+  //             }}
+  //           >
+  //             {office.toUpperCase()}
+  //           </button>
+  //         </div>
+  //       );
+  //     })
+  //   );
+  // }, [officeSearch]);
+
+  // React.useEffect(() => {
+  //   console.log(value, id, "value");
+  // }, [value, id]);
 
   return (
     <>
@@ -144,8 +153,6 @@ const NewGuest = () => {
           <div>
             <label htmlFor="">Title</label>
             <Select
-              name=""
-              id=""
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -214,8 +221,6 @@ const NewGuest = () => {
           <div>
             <label htmlFor="">Part of a Group?</label>
             <Select
-              name=""
-              id=""
               onChange={(e) => {
                 setIsGroup(e.target.value);
               }}
@@ -258,16 +263,26 @@ const NewGuest = () => {
                 onChange={staffSearchHandler}
               />
               {staffName ? res : ""}
+              {/* <Filter
+                data={staffSearch}
+                onChange={staffSearchHandler}
+                value={office}
+              /> */}
             </div>
             <div>
               <label htmlFor="">Staff Office</label>
-              <Input
+              {/* <Input
                 type="text"
                 required
                 onChange={officeSearchHandler}
                 value={office}
               />
-              {office ? officeRes : ""}
+              {office ? officeRes : ""} */}
+              <FilterOffice
+                data={officeSearch}
+                onChange={officeSearchHandler}
+                value={office}
+              />
             </div>
           </div>
         </div>

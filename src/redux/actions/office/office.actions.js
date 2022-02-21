@@ -1,11 +1,14 @@
 import axios from "axios";
-import { GET_OFFICE_FAIL, GET_OFFICE_SUCCESS } from "../../constants/constants";
-const BASE_URL = "http://localhost:4000/api/v1/office";
+import {
+  GET_OFFICE_FAIL,
+  GET_OFFICE_SUCCESS,
+  BASE_URL,
+} from "../../constants/constants";
 
 export const getOffice = (search, setSearch, _) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`${BASE_URL}/search/?q=${search}`);
+      const res = await axios.get(`${BASE_URL}/office/search/?q=${search}`);
       setSearch(res.data.data);
       dispatch({
         type: GET_OFFICE_SUCCESS,

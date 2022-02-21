@@ -1,23 +1,18 @@
-.container {
-  display: flex;
+.frontdesk__dashboard__container {
   width: 100vw;
-  height: 96vh;
+  height: 100vh;
+  position: absolute;
+  padding-top: 40px;
+  /* top: 10%; */
 }
 
-.dashboard__container {
-  display: flex;
-  flex-direction: column;
+.front__dashboard__container {
   width: 100%;
+  position: absolute;
   height: 100%;
-  margin-left: 210px;
-  background: rgb(0, 124, 100);
-  background: linear-gradient(
-    90deg,
-    rgba(0, 124, 100, 1) 0%,
-    rgba(0, 124, 100, 1) 35%,
-    rgba(241, 114, 48, 1) 100%
-  );
   color: #fff;
+  left: 15%;
+  margin-top: 10px;
 }
 
 .dashboard__title__cards {

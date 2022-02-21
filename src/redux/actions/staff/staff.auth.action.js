@@ -7,13 +7,14 @@ import {
   ADD_USER_FAIL,
   FIND_STAFF,
   FIND_STAFF_FAIL,
+  BASE_URL,
 } from "../../constants/constants";
-const BASE_URL = "http://localhost:4000/api/v1/staff";
+// BASE_URL = "http://localhost:4000/api/v1/staff";
 export const startStaffLogin = (data, toast, navigate, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `${BASE_URL}/login`,
+      url: `${BASE_URL}/staff/login`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -40,7 +41,7 @@ export const startStaffLogin = (data, toast, navigate, setLoading) => {
       setLoading(false);
       toast({
         title: "An error Occured!",
-        description: `${err.message || err.response.data.message}`,
+        description: `${err.response.data.message || err.message}`,
         status: "error",
         duration: 9000,
         isClosable: true,
@@ -54,7 +55,7 @@ export const addStaff = (data, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `${BASE_URL}/`,
+      url: `${BASE_URL}/staff`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -79,7 +80,7 @@ export const addStaff = (data, toast, setLoading) => {
     } catch (err) {
       dispatch({
         type: ADD_USER_FAIL,
-        payload: err.message || err.response.data.message,
+        payload: err.response.data.message || err.message,
       });
       setLoading(false);
       toast({
@@ -98,7 +99,7 @@ export const findStaff = (search, setSearch) => {
   return async (dispatch) => {
     const config = {
       method: "get",
-      url: `${BASE_URL}/?q=${search}`,
+      url: `${BASE_URL}/staff/?q=${search}`,
       headers: {
         "Content-Type": "application/json",
       },

@@ -1,14 +1,17 @@
 .guestscreen__container {
   width: 100vw;
   height: 100vh;
+  /* padding-top: 40px; */
 }
 
 .guestscreen__content {
-  /* width: ; */
-  height: 100%;
+  width: 85%;
+  height: 90%;
   position: absolute;
   left: 15%;
-  padding: 20px;
+  top: 10%;
+  padding: 10px;
+  overflow-y: scroll;
 }
 
 /* New Guest */

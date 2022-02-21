@@ -29,6 +29,7 @@ import {
 import { getOffice } from "../../redux/actions/office/office.actions";
 import { PersonSharp } from "@material-ui/icons";
 import { addStaff } from "../../redux/actions/staff/staff.auth.action";
+import PageTitle from "../PageTitle/Pagetitle";
 
 const NavbarFront = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,7 +49,10 @@ const NavbarFront = () => {
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const logoutHandler = () => {};
+  const logoutHandler = () => {
+    localStorage.removeItem("frontdesk");
+    navigate("/");
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -70,6 +74,7 @@ const NavbarFront = () => {
             onClick={(e) => {
               e.preventDefault();
               setItem(office);
+              setOffice("");
             }}
             style={{
               backgroundColor: "#f17230",
@@ -98,8 +103,20 @@ const NavbarFront = () => {
     dispatch(getOffice(e.target.value, setSearch, _));
   };
 
+  const [username, setUserName] = React.useState("");
+
+  React.useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("frontdesk"));
+    if (!user) {
+      navigate("/");
+    } else {
+      setUserName(user.user.firstname);
+    }
+    console.log(username);
+  }, [navigate, username]);
   return (
     <>
+      <PageTitle user={username} />
       <div className="navbar__container">
         <div className="navbar__logo">
           <img src={logo} alt="ACA" />
@@ -124,7 +141,7 @@ const NavbarFront = () => {
               <h3>Logs</h3>
             </div>
           </Link>
-          <Link to="/admin/register" className="links__add__admin">
+          <Link to="/frontdesk/register" className="links__add__admin">
             <div className="link">
               <AiOutlineUserAdd />
               <h3>Add Admin</h3>

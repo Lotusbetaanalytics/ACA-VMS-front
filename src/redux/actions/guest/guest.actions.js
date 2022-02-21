@@ -4,14 +4,14 @@ import {
   ADD_GUEST_FAIL,
   GET_STAFF_GUEST,
   GET_STAFF_GUEST_FAIL,
+  BASE_URL,
 } from "../../constants/constants";
-const BASE_URL = "http://localhost:4000/api/v1/guest";
 
 export const addGuest = (data, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `${BASE_URL}/new`,
+      url: `${BASE_URL}/guest/new`,
       headers: {
         "Content-Type": "application/json",
         "access-token": JSON.parse(localStorage.getItem("staff")).token,
@@ -56,7 +56,7 @@ export const addGuest = (data, toast, setLoading) => {
 export const getStaffGuest = (setData, setLoading) => {
   const config = {
     method: "get",
-    url: `${BASE_URL}/staff`,
+    url: `${BASE_URL}/guest/staff`,
     headers: {
       "Content-Type": "application/json",
       "access-token": JSON.parse(localStorage.getItem("staff")).token,

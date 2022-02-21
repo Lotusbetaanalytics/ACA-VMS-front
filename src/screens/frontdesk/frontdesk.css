@@ -53,25 +53,18 @@
 
 .frontdesk__dashboard__container {
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   overflow: hidden;
-  background: rgb(0, 124, 100);
-  background: linear-gradient(
-    90deg,
-    rgba(0, 124, 100, 1) 0%,
-    rgba(0, 124, 100, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
   display: flex;
   grid-gap: 40px;
 }
 
 .dashboard__content {
   width: 90vw;
-  height: 100vh;
   position: absolute;
   left: 15%;
   padding: 20px;
+  border: 1px solid maroon;
 }
 .dashboard__content h2 {
   font-size: 20px;
@@ -108,4 +101,21 @@
   height: inherit;
   border: none;
   font-size: inherit;
+}
+
+/* Add front desk */
+
+.add__frontdesk__container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.add__frontdesk__form {
+  width: 70vw;
+  position: absolute;
+  left: 18%;
+  top: 15%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
 }

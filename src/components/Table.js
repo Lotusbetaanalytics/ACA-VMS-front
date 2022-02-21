@@ -83,6 +83,7 @@ function ShowDataTable({ data }) {
         fontFamily: "inherit",
         padding: "10px",
         width: "95%",
+        marginTop: "60px",
       }}
     />
   );
