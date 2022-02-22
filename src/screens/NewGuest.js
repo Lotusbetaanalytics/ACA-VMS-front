@@ -21,7 +21,7 @@ import { addGuest } from "../redux/actions/guest/guest.actions";
 import { getOffice } from "../redux/actions/office/office.actions";
 import FilterOffice from "../components/AutoCompleteOffice";
 import AutoCompleteContext from "../context/AutoCompleteContext";
-
+import "./staff/staff.css";
 const NewGuest = () => {
   const { value, setValue } = React.useContext(AutoCompleteContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -231,7 +231,12 @@ const NewGuest = () => {
           </div>
           <div className="takephoto">
             <div className="visitor__photo">
-              <Button onClick={onOpen} my={3} rightIcon={<CameraFront />}>
+              <Button
+                onClick={onOpen}
+                my={3}
+                rightIcon={<CameraFront />}
+                colorScheme="orange"
+              >
                 Take visitor Photo
               </Button>
               <img src={photo} alt="" />
@@ -290,9 +295,9 @@ const NewGuest = () => {
           <Button
             type="submit"
             mt={4}
-            colorScheme="orange"
-            size={"lg"}
-            variant="outline"
+            colorScheme="green"
+            // size={"lg"}
+            // variant="outline"
             isLoading={loading}
             loadingText="Adding Guest..."
           >

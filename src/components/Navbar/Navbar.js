@@ -12,7 +12,7 @@ import {
 import { FaSignOutAlt } from "react-icons/fa";
 import "./Navbar.css";
 import { useDispatch } from "react-redux";
-import PageTitle from "../PageTitle/Pagetitle";
+import PageTitle from "../PageTitle/PagetitleStaff";
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

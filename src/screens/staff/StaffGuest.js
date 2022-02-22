@@ -12,14 +12,18 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
+  useToast,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
 import "./staff.css";
-import { getStaffGuest } from "../../redux/actions/guest/guest.actions";
+import {
+  approveGuest,
+  getStaffGuest,
+  rejectGuest,
+} from "../../redux/actions/guest/guest.actions";
 import { useDispatch } from "react-redux";
 
 const StaffGuest = () => {
@@ -28,15 +32,21 @@ const StaffGuest = () => {
   const [loading, setLoading] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userPhoto, setUserPhoto] = React.useState("");
+  const [id, setId] = React.useState("");
+  const [guestStatus, setGuestStatus] = React.useState("Pending");
 
+  const toast = useToast();
   const clickHandler = (event) => {
     onOpen();
     setUserPhoto(event.target.src);
+    setId(event.target.id);
+    setGuestStatus(event.target.alt);
   };
+
   React.useEffect(() => {
     setLoading(true);
     dispatch(getStaffGuest(setData, setLoading));
-  }, [dispatch]);
+  }, [dispatch, guestStatus]);
 
   return (
     <div className="staff__guest_container">
@@ -94,7 +104,7 @@ const StaffGuest = () => {
                             onClick={clickHandler}
                             style={{ cursor: "pointer" }}
                           >
-                            <img src={photo} alt="" />
+                            <img src={photo} alt={status} id={_id} />
                           </div>
 
                           <Modal isOpen={isOpen} onClose={onClose}>
@@ -107,10 +117,66 @@ const StaffGuest = () => {
                                   display: "flex",
                                   alignItems: "center",
                                   justifyContent: "center",
+                                  flexDirection: "column",
                                   padding: "20px",
                                 }}
                               >
                                 <img src={userPhoto} alt="" />
+                                {guestStatus === "Pending" ? (
+                                  <div className="approval__buttons">
+                                    <Button
+                                      colorScheme="green"
+                                      onClick={(event) => {
+                                        event.preventDefault();
+                                        dispatch(
+                                          approveGuest(id, toast, setLoading)
+                                        );
+
+                                        setTimeout(() => {
+                                          onClose();
+                                        }, 1000);
+                                      }}
+                                      isLoading={loading}
+                                      loadingText="Approving..."
+                                    >
+                                      Approve
+                                    </Button>
+                                    <Button
+                                      colorScheme="red"
+                                      onClick={(event) => {
+                                        event.preventDefault();
+                                        dispatch(
+                                          rejectGuest(id, toast, setLoading)
+                                        );
+                                        setTimeout(() => {
+                                          onClose();
+                                        }, 1000);
+                                      }}
+                                    >
+                                      Decline
+                                    </Button>
+                                  </div>
+                                ) : (
+                                  <h2
+                                    style={{
+                                      fontSize: "16px",
+                                      marginTop: "10px",
+                                      width: "50%",
+                                      height: "100%",
+                                      borderRadius: "5px",
+                                      border: "1px solid #e6e6e6",
+                                      textAlign: "center",
+                                      backgroundColor: `${
+                                        guestStatus === "Approved"
+                                          ? "green"
+                                          : "red"
+                                      }`,
+                                      color: "white",
+                                    }}
+                                  >
+                                    Guest Already {guestStatus}
+                                  </h2>
+                                )}
                               </ModalBody>
                             </ModalContent>
                           </Modal>

@@ -50,6 +50,7 @@ const AddFrontDesk = () => {
             <label htmlFor="">First Name</label>
             <Input
               value={firstname}
+              required
               placeholder="Type first name"
               onChange={(e) => {
                 setFirstName(e.target.value);
@@ -61,6 +62,7 @@ const AddFrontDesk = () => {
             <Input
               placeholder="Type last name..."
               value={lastname}
+              required
               onChange={(e) => {
                 setLastName(e.target.value);
               }}
@@ -70,6 +72,7 @@ const AddFrontDesk = () => {
             <label htmlFor="">Email Address</label>
             <Input
               value={email}
+              required
               placeholder="Type Email Address..."
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -85,6 +88,7 @@ const AddFrontDesk = () => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
+              required
             />
           </div>
           <div>
@@ -94,8 +98,8 @@ const AddFrontDesk = () => {
                 setRole(e.target.value);
               }}
             >
-              <option value={false}>Super Admin</option>
-              <option value={true}>Admin</option>
+              <option value="superAdmin">Super Admin</option>
+              <option value="admin">Admin</option>
             </Select>
           </div>
           <div>

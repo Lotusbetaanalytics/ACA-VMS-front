@@ -120,3 +120,30 @@ export const findStaff = (search, setSearch) => {
     }
   };
 };
+
+export const getAStaffFromToken = (search, setSearch) => {
+  return async (dispatch) => {
+    const config = {
+      method: "get",
+      url: `${BASE_URL}/guest/?token=${search}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios(config);
+      console.log(res.data);
+      setSearch(res.data.data);
+      dispatch({
+        type: FIND_STAFF,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: FIND_STAFF_FAIL,
+        payload: err.message || err.response.data.message,
+      });
+    }
+  };
+};

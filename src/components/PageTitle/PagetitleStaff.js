@@ -3,7 +3,7 @@ import "./pagetitle.css";
 
 const PageTitle = (props) => {
   const [name, setName] = useState("");
-  const { user, office } = props;
+  const { user } = props;
 
   useEffect(() => {
     setName(user);
@@ -21,9 +21,7 @@ const PageTitle = (props) => {
   }
   return (
     <div className="page__heading">
-      <div>
-        <h1>{office.toUpperCase()}</h1>
-      </div>
+      <div></div>
       <div>
         <h1>
           {greeting} {name}!

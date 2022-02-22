@@ -3,6 +3,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import NavbarFront from "../components/NavbarFront/NavbarFront";
 import "./screen.styles.css";
 import NewGuest from "./NewGuest";
+import VerifyGuest from "./VerifyGuest";
 
 const GuestScreen = () => {
   return (
@@ -10,7 +11,7 @@ const GuestScreen = () => {
       <NavbarFront />
       <div className="guestscreen__content">
         <Tabs variant="soft-rounded" colorScheme="green">
-          <TabList>
+          <TabList style={{ color: "white" }}>
             <Tab>Create New Guest</Tab>
             <Tab>Returning Guest</Tab>
             <Tab>Verify Guest Token</Tab>
@@ -23,7 +24,7 @@ const GuestScreen = () => {
               <p>two!</p>
             </TabPanel>
             <TabPanel>
-              <p>three!</p>
+              <VerifyGuest />
             </TabPanel>
           </TabPanels>
         </Tabs>

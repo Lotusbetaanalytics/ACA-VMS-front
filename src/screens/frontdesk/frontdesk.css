@@ -112,10 +112,29 @@
 
 .add__frontdesk__form {
   width: 70vw;
-  position: absolute;
-  left: 18%;
+  position: fixed;
+  left: 22%;
   top: 15%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
+  grid-gap: 20px;
+  justify-content: space-around;
+  height: 60%;
+}
+
+/* Add Office */
+.add__office__container {
+  position: fixed;
+  height: 60vh;
+}
+.add__office__container form {
+  position: fixed;
+  height: 50%;
+  top: 50%;
+  display: grid;
+  /* grid-gap: 10px; */
+  grid-template-columns: 1fr;
+  /* justify-content: space-evenly; */
+  transform: translate(-50%, -50%);
+  left: 50%;
 }

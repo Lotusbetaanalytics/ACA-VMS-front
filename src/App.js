@@ -11,17 +11,28 @@ import GuestScreen from "./screens/GuestScreen";
 import StaffGuest from "./screens/staff/StaffGuest";
 import AddFrontDesk from "./screens/frontdesk/AddFrontDesk";
 import AutoCompleteContext from "./context/AutoCompleteContext";
+import AddOffice from "./screens/frontdesk/AddOffice";
 
 function App() {
   const [value, setValue] = React.useState("");
   const [id, setId] = React.useState("");
+
+  const frontdesk = JSON.parse(localStorage.getItem("frontdesk"));
+
   return (
     <>
-      <AutoCompleteContext.Provider value={{ value, setValue, id, setId }}>
+      <AutoCompleteContext.Provider
+        value={{ value, setValue, id, setId, frontdesk }}
+      >
         <ChakraProvider>
           <Router>
             <Routes>
               <Route exact path="/" element={<FrontDeskLogin />} />
+              <Route
+                exact
+                path="/frontdesk/addoffice"
+                element={<AddOffice />}
+              />
               <Route exact path="/frontdesk/guest" element={<GuestScreen />} />
               <Route
                 exact

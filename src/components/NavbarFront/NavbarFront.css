@@ -61,6 +61,21 @@
   width: 90%;
 }
 
+/* Modal Form */
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.modal__form input,
+button {
+  border-radius: 30px;
+}
+.modal__form button {
+  border-radius: 30px;
+}
+
 @media screen and (max-width: 768px) {
   .link h3 {
     display: none;

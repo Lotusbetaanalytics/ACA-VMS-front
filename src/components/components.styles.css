@@ -56,3 +56,15 @@
   font-weight: 600;
   font-family: "Century Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+.MuiInputBase-root {
+  border-radius: 30px !important;
+  height: 40px !important;
+}
+
+#filter-demo {
+  position: absolute;
+  width: inherit;
+  /* left: 0; */
+  padding-left: 10px;
+}

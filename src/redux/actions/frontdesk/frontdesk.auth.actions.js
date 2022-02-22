@@ -48,7 +48,7 @@ export const startLogin = (data, toast, navigate, setLoading) => {
   };
 };
 
-export const createFrontDesk = (data, toast) => {
+export const createFrontDesk = (data, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
@@ -64,6 +64,7 @@ export const createFrontDesk = (data, toast) => {
         type: CREATE_FRONT_DESK,
         payload: res.data,
       });
+      setLoading(false);
       toast({
         title: "Success",
         description: "Front Desk Created Successfully",
@@ -77,6 +78,7 @@ export const createFrontDesk = (data, toast) => {
         type: CREATE_FRONT_DESK_FAIL,
         payload: err.message || err.response.data.message,
       });
+      setLoading(false);
       toast({
         title: "An error Occured!",
         description: `${err.message || err.response.data.message}`,
