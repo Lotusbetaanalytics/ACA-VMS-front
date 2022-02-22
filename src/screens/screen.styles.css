@@ -64,3 +64,17 @@
   grid-gap: 20px;
   /* margin: 20px auto; */
 }
+
+.guest__verified__details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 40px;
+  justify-content: space-between;
+  height: 40vh;
+  grid-gap: 30px;
+  width: 60%;
+  position: absolute;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+}

@@ -121,7 +121,13 @@ export const findStaff = (search, setSearch) => {
   };
 };
 
-export const getAStaffFromToken = (search, setSearch) => {
+export const getAStaffFromToken = (
+  search,
+  setSearch,
+  setLoading,
+  toast,
+  setShow
+) => {
   return async (dispatch) => {
     const config = {
       method: "get",
@@ -133,17 +139,28 @@ export const getAStaffFromToken = (search, setSearch) => {
 
     try {
       const res = await axios(config);
-      console.log(res.data);
+      console.log(res.data.data);
       setSearch(res.data.data);
       dispatch({
         type: FIND_STAFF,
         payload: res.data,
       });
+      setShow(true);
+      setLoading(false);
     } catch (err) {
       dispatch({
         type: FIND_STAFF_FAIL,
         payload: err.message || err.response.data.message,
       });
+      toast({
+        title: "An error Occured!",
+        description: `${err.response.data.message}`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top-right",
+      });
+      setLoading(false);
     }
   };
 };
