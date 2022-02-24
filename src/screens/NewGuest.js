@@ -41,18 +41,19 @@ const NewGuest = () => {
   const [res, setRes] = React.useState("");
   // const [officeRes, setOfficeRes] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [show, setShow] = React.useState(false);
 
   const dispatch = useDispatch();
   const toast = useToast();
 
   const staffSearchHandler = (e) => {
     setStaffName(e.target.value);
-    dispatch(findStaff(staffName, setStaffSearch));
+    dispatch(findStaff(staffName, setStaffSearch, value));
   };
 
   const officeSearchHandler = (e) => {
     setOffice(e.target.value);
-    dispatch(getOffice(office, setOfficeSearch));
+    dispatch(getOffice(office, setOfficeSearch, setShow));
   };
 
   const submitHandler = (e) => {
@@ -88,7 +89,7 @@ const NewGuest = () => {
   React.useEffect(() => {
     setRes(
       staffSearch.map(({ _id, fullname }) => {
-        return fullname ? (
+        return (
           <div key={_id}>
             <button
               onClick={(e) => {
@@ -108,12 +109,10 @@ const NewGuest = () => {
               {fullname.toUpperCase()}
             </button>
           </div>
-        ) : (
-          <div>No results found!</div>
         );
       })
     );
-  }, [staffSearch]);
+  }, [staffSearch, value]);
 
   // React.useEffect(() => {
   //   setOfficeRes(
@@ -260,21 +259,6 @@ const NewGuest = () => {
           <h2>Staff to see</h2>
           <div className="staff__information">
             <div>
-              <label htmlFor="">Name of Staff</label>
-              <Input
-                type="text"
-                value={staffName}
-                required
-                onChange={staffSearchHandler}
-              />
-              {staffName ? res : ""}
-              {/* <Filter
-                data={staffSearch}
-                onChange={staffSearchHandler}
-                value={office}
-              /> */}
-            </div>
-            <div>
               <label htmlFor="">Staff Office</label>
               {/* <Input
                 type="text"
@@ -289,6 +273,25 @@ const NewGuest = () => {
                 value={office}
               />
             </div>
+            {show ? (
+              <div>
+                <label htmlFor="">Name of Staff</label>
+                <Input
+                  type="text"
+                  value={staffName}
+                  required
+                  onChange={staffSearchHandler}
+                />
+                {staffName ? res : ""}
+                {/* <Filter
+                data={staffSearch}
+                onChange={staffSearchHandler}
+                value={office}
+              /> */}
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
         <div>

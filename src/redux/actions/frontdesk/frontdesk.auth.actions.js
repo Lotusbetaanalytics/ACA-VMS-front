@@ -25,7 +25,7 @@ export const startLogin = (data, toast, navigate, setLoading) => {
 
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data,
+        payload: res.data.data,
       });
       setLoading(false);
       localStorage.setItem("frontdesk", JSON.stringify(res.data));

@@ -154,7 +154,7 @@ const NavbarFront = () => {
                 </div>
               </Link>
 
-              <Link to="/logs" className="links__logs">
+              <Link to="/admin/logs" className="links__logs">
                 <div className="link">
                   <AiOutlineSchedule />
                   <h3>Logs</h3>
@@ -299,7 +299,7 @@ const NavbarFront = () => {
                 </div>
               </Link>
 
-              <Link to="/logs" className="links__logs">
+              <Link to="/admin/logs" className="links__logs">
                 <div className="link">
                   <AiOutlineSchedule />
                   <h3>Logs</h3>

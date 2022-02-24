@@ -7,7 +7,7 @@ import {
   ADD_OFFICE_FAIL,
 } from "../../constants/constants";
 
-export const getOffice = (search, setSearch, _) => {
+export const getOffice = (search, setSearch, setShow) => {
   return async (dispatch) => {
     try {
       const res = await axios.get(`${BASE_URL}/office/search/?q=${search}`);
@@ -16,6 +16,7 @@ export const getOffice = (search, setSearch, _) => {
         type: GET_OFFICE_SUCCESS,
         payload: res.data,
       });
+      setShow(true);
     } catch (error) {
       dispatch({
         type: GET_OFFICE_FAIL,
@@ -24,6 +25,7 @@ export const getOffice = (search, setSearch, _) => {
     }
   };
 };
+
 export const addOffice = (data, setLoading, toast) => {
   return async (dispatch) => {
     const config = {

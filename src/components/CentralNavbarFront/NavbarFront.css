@@ -1,0 +1,86 @@
+.navbar__container {
+  padding-top: 10px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fff;
+  box-shadow: 2px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 15vw;
+  height: 100vh;
+  top: 0;
+  z-index: 99;
+}
+
+.navbar__logo > img {
+  width: 80%;
+}
+.navbar__logo {
+  padding: 10px 5px;
+}
+
+.navbar__links {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 30px;
+}
+/* .navbar__links a:hover {
+  color: rgb(1, 29, 1) !important;
+  /* background: rgb(1, 29, 1); *
+  padding: 10px 3px;
+  border-right: 3px solid rgb(1, 29, 1);
+  width: 152%;
+}
+.navbar__links button:hover {
+  color: rgb(1, 29, 1) !important;
+  /* background: rgb(1, 29, 1); *
+  padding: 10px 3px;
+  border-right: 3px solid rgb(1, 29, 1);
+  width: 100%;
+} */
+
+.link {
+  display: flex;
+  align-items: center;
+  grid-gap: 4px;
+  font-size: 16px;
+  width: 170px;
+}
+.link:hover {
+  color: #fff !important;
+  background: rgb(1, 29, 1);
+  padding: 10px 3px;
+  border-radius: 4px;
+}
+
+.links__logout {
+  position: absolute;
+  bottom: 30px;
+  width: 90%;
+}
+
+/* Modal Form */
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.modal__form input,
+button {
+  border-radius: 30px;
+}
+.modal__form button {
+  border-radius: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .link h3 {
+    display: none;
+  }
+  .link {
+    font-size: 18px;
+  }
+}

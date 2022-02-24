@@ -5,14 +5,13 @@ import "./frontdesk.css";
 import { Button } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { startLogin } from "../../redux/actions/frontdesk/frontdesk.auth.actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
 const FrontDeskLogin = () => {
   const navigate = useNavigate();
-  const state = useSelector((state) => state.frontDesk);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);

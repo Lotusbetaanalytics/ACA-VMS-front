@@ -18,7 +18,7 @@ export const addGuest = (data, toast, setLoading) => {
       url: `${BASE_URL}/guest/new`,
       headers: {
         "Content-Type": "application/json",
-        "access-token": JSON.parse(localStorage.getItem("staff")).token,
+        "access-token": JSON.parse(localStorage.getItem("frontdesk")).token,
       },
       data: data,
     };
@@ -47,7 +47,7 @@ export const addGuest = (data, toast, setLoading) => {
       setLoading(false);
       toast({
         title: "An error Occured!",
-        description: `${err.message || err.response.data.message}`,
+        description: `${err.response.data.message}`,
         status: "error",
         duration: 9000,
         isClosable: true,

@@ -95,7 +95,7 @@ export const addStaff = (data, toast, setLoading) => {
   };
 };
 
-export const findStaff = (search, setSearch) => {
+export const findStaff = (search, setSearch, office) => {
   return async (dispatch) => {
     const config = {
       method: "get",
@@ -107,6 +107,34 @@ export const findStaff = (search, setSearch) => {
 
     try {
       const res = await axios(config);
+      setSearch(res.data.data.filter((item) => item.office === office));
+      dispatch({
+        type: FIND_STAFF,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: FIND_STAFF_FAIL,
+        payload: err.message || err.response.data.message,
+      });
+    }
+  };
+};
+
+export const findStaffInSameOffice = (search, setSearch) => {
+  const frontdesk = JSON.parse(localStorage.getItem("frontdesk")).user.office;
+  return async (dispatch) => {
+    const config = {
+      method: "get",
+      url: `${BASE_URL}/staff/?q=${search}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios(config);
+      console.log(res.data.data.filter((item) => item.office === frontdesk));
       setSearch(res.data.data);
       dispatch({
         type: FIND_STAFF,

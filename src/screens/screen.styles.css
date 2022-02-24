@@ -78,3 +78,12 @@
   transform: translate(-50%, -50%);
   top: 50%;
 }
+
+.logs__container {
+  width: 80vw;
+  height: 90vh;
+  position: fixed;
+  top: 10%;
+  left: 18%;
+  overflow: scroll;
+}
