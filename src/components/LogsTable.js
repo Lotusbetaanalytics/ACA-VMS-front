@@ -120,7 +120,10 @@ function LogTable({ data }) {
           <ModalCloseButton />
           <ModalBody>
             <table>
-              <tbody style={{ textAlign: "left", width: "100%" }}>
+              <tbody
+                style={{ textAlign: "left", width: "100%" }}
+                className="guest__table__log"
+              >
                 <tr>
                   <th>Title:</th>
                   <td>{object.title}</td>
@@ -156,14 +159,14 @@ function LogTable({ data }) {
                 />
               </div>
               <div>
-                {object.status === "Pending" ? (
+                {object.status === "Pending" && <h2>Awaiting Host</h2>}
+                {object.status === "Approved" && (
                   <Button colorScheme="green" mt={4}>
                     Check In Guest
                   </Button>
-                ) : (
-                  <Button colorScheme="green" mt={4}>
-                    Check Out Guest
-                  </Button>
+                )}
+                {object.status === "Rejected" && (
+                  <h2>Sorry! Your Host has refused to meet you!</h2>
                 )}
               </div>
             </div>

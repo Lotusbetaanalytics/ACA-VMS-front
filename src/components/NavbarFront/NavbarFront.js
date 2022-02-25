@@ -45,6 +45,8 @@ const NavbarFront = () => {
 
   const { frontdesk } = React.useContext(AutoCompleteContext);
   const [isSuperAdmin, setSuperAdmin] = React.useState(null);
+  const [superAdminOffice, setSuperAdminOffice] =
+    React.useState("Central Office");
   const [staffOffice, setStaffOffice] = React.useState("");
 
   const btnRef = React.useRef();
@@ -59,7 +61,7 @@ const NavbarFront = () => {
 
   React.useEffect(() => {
     if (frontdesk) {
-      setSuperAdmin(frontdesk.user.isSuperAdmin);
+      // setSuperAdmin(frontdesk.user.isSuperAdmin);
       setStaffOffice(frontdesk.user.office);
     }
   }, [frontdesk, staffOffice]);
@@ -129,13 +131,14 @@ const NavbarFront = () => {
     } else {
       setUserName(user.user.firstname);
       setFrontOffice(user.user.office);
+      setSuperAdmin(user.user.isSuperAdmin);
     }
-  }, [navigate, username]);
+  }, [navigate]);
   return (
     <>
       {isSuperAdmin ? (
         <>
-          <PageTitle user={username} office={frontoffice} />
+          <PageTitle user={username} office={superAdminOffice} />
           <div className="navbar__container">
             <div className="navbar__logo">
               <img src={logo} alt="ACA" />

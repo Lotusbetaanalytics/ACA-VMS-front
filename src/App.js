@@ -13,6 +13,7 @@ import AddFrontDesk from "./screens/frontdesk/AddFrontDesk";
 import AutoCompleteContext from "./context/AutoCompleteContext";
 import AddOffice from "./screens/frontdesk/AddOffice";
 import Logs from "./screens/Logs";
+import ViewGuests from "./screens/ViewGuests";
 
 function App() {
   const [value, setValue] = React.useState("");
@@ -34,6 +35,7 @@ function App() {
             <Route exact path="/logs" element={<Logs />} />
             <Route exact path="/frontdesk/addoffice" element={<AddOffice />} />
             <Route exact path="/frontdesk/guest" element={<GuestScreen />} />
+            <Route exact path="/frontdesk/seeguest" element={<ViewGuests />} />
             <Route
               exact
               path="/frontdesk/register"

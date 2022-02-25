@@ -1,23 +1,31 @@
 .frontdesk__dashboard__container {
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  /* position: absolute; */
   padding-top: 40px;
+  display: flex;
+  /* overflow-y: scroll; */
   /* top: 10%; */
 }
 
 .front__dashboard__container {
   width: 100%;
-  position: absolute;
   height: 100%;
   color: #fff;
   left: 15%;
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll !important;
 }
 
 .dashboard__title__cards {
   width: 100%;
   padding: 0.5rem 1rem;
+  top: 5%;
+  left: 15%;
+  position: relative;
+  /* z-index: -1; */
 }
 
 .cards {
@@ -28,9 +36,21 @@
   width: 100%;
 }
 
-.dashboard__container .chart {
-  width: 25%;
-  margin: 0 auto;
+.datepicker__heading {
+  width: 80%;
+  display: flex;
+  top: 20px;
+  color: #000;
+  position: relative;
+  /* z-index: 1; */
+  left: 17%;
+}
+.datepicker__heading select {
+  flex: 1;
+}
+.datepicker__heading h1 {
+  flex: 1;
+  font-size: 30px;
 }
 
 @media screen and (max-width: 768px) {

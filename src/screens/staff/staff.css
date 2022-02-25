@@ -103,10 +103,11 @@ button {
 .staff__guest__contents {
   position: fixed;
   left: 15%;
-  /* top: 13%; */
+  top: 13%;
   width: 80vw;
-  height: 100vh;
+  height: 90vh;
   padding: 20px;
+  overflow: scroll;
 }
 
 .approval__buttons {

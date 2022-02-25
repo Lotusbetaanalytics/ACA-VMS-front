@@ -27,21 +27,25 @@ select {
   border-radius: 30px;
 }
 
-tr {
+.guest__table__log tr {
   display: flex;
-  grid-gap: 20px;
+  grid-gap: 10px;
   width: 100%;
 }
 
-td,
-th {
+.guest__table__log td,
+.guest__table__log th {
   text-align: left;
   flex: 1;
-
   align-self: flex-start;
 }
 
-tbody {
+.guest__table__log th {
+  color: #d1cccc;
+  font-weight: 300;
+}
+
+.guest__table__log tbody {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 10px;
