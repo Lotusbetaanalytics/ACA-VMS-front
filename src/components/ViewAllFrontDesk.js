@@ -65,7 +65,7 @@ const tableIcons = {
 //   );
 // }
 
-function LogTable({ data, title = "Visitors Logs" }) {
+function FrontDeskLogTable({ data }) {
   const [selectedRow, setSelectedRow] = React.useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [object, setObject] = React.useState({});
@@ -73,19 +73,18 @@ function LogTable({ data, title = "Visitors Logs" }) {
     setObject(rowData);
     onOpen();
   }
-
+  const frontdesk = JSON.parse(localStorage.getItem("frontdesk")).user
+    .isSuperAdmin;
   return (
     <>
       <MaterialTable
-        title={title}
+        title="All Front Desks"
         data={data}
         columns={[
-          { title: "Title", field: "title" },
-          { title: "Full Name", field: "fullname" },
-          { title: "Company", field: "company" },
-          { title: "Purpose of Visit", field: "purpose" },
-          { title: "Host", field: "host[fullname]" },
-          { title: "Status", field: "status" },
+          { title: "First Name", field: "firstname" },
+          { title: "Last Name", field: "lastname" },
+          { title: "Email Address", field: "email" },
+          frontdesk && { title: "Office", field: "office" },
         ]}
         onRowClick={(evt, selectedRow) => {
           setSelectedRow(selectedRow.tableData.id);
@@ -116,7 +115,7 @@ function LogTable({ data, title = "Visitors Logs" }) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Guest Details</ModalHeader>
+          <ModalHeader>Front Desk Details</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <table>
@@ -125,51 +124,29 @@ function LogTable({ data, title = "Visitors Logs" }) {
                 className="guest__table__log"
               >
                 <tr>
-                  <th>Title:</th>
-                  <td>{object.title}</td>
-                </tr>
-                <tr>
-                  <th>Full Name:</th>
+                  <th>First Name:</th>
                   <td>
-                    <td>{object["fullname"]}</td>
+                    <td>{object["firstname"]}</td>
                   </td>
                 </tr>
                 <tr>
-                  <th>Company:</th>
-                  <td>{_.capitalize(object["company"])}</td>
-                </tr>
-                <tr>
-                  <th>Purpose of Visit:</th>
-                  <td>{_.capitalize(object["purpose"])}</td>
-                </tr>
-                <tr>
-                  <th>Date and Time of Visit:</th>
+                  <th>Last Name:</th>
                   <td>
-                    <Moment>{object["createdAt"]}</Moment>
+                    <td>{object["lastname"]}</td>
                   </td>
                 </tr>
+                <tr>
+                  <th>Email Address:</th>
+                  <td>{object["email"]}</td>
+                </tr>
+                {frontdesk && (
+                  <tr>
+                    <th>Office:</th>
+                    <td>{object["office"]}</td>
+                  </tr>
+                )}
               </tbody>
             </table>
-            <div>
-              <div className="guest__image">
-                <img
-                  src={object.photo}
-                  alt="guest"
-                  style={{ width: "300px" }}
-                />
-              </div>
-              <div>
-                {object.status === "Pending" && <h2>Awaiting Host</h2>}
-                {object.status === "Approved" && (
-                  <Button colorScheme="green" mt={4}>
-                    Check In Guest
-                  </Button>
-                )}
-                {object.status === "Rejected" && (
-                  <h2>Sorry! Your Host has refused to meet you!</h2>
-                )}
-              </div>
-            </div>
           </ModalBody>
 
           <ModalFooter>
@@ -183,4 +160,4 @@ function LogTable({ data, title = "Visitors Logs" }) {
   );
 }
 
-export default LogTable;
+export default FrontDeskLogTable;

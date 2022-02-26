@@ -9,25 +9,30 @@ import {
   FaCheck,
   FaShare,
   FaBriefcase,
-  FaRegCalendarAlt,
   FaUsers,
   FaUsersCog,
 } from "react-icons/fa";
 import "./dashboard.css";
 import { useSelector } from "react-redux";
 import { Select } from "@chakra-ui/react";
-import { getFrontDashboardData } from "../../redux/actions/frontdesk/frontdesk.dashboard.actions";
+import {
+  getFrontDashboardData,
+  getCentralData,
+} from "../../redux/actions/frontdesk/frontdesk.dashboard.actions";
 
 const Dashboard = () => {
-  const [visitorsToday, setVisitors] = useState(null);
-  const [allStaff, setAllStaff] = useState(null);
-  const [allAdmin, setAllAdmin] = useState(0);
-  const [preBookedGuests, setPreBookedGuests] = useState(null);
-  const [checkedIn, setCheckedIn] = useState(null);
-  const [checkedOut, setCheckedOut] = useState(null);
-  const [pendingVisitors, setPending] = useState(null);
-  const [queryDate, setQueryDate] = React.useState(
-    new Date().toLocaleDateString()
+  const [visitorsToday, setVisitors] = useState([]);
+  const [allStaff, setAllStaff] = useState([]);
+  const [allAdmin, setAllAdmin] = useState([]);
+  const [preBookedGuests, setPreBookedGuests] = useState([]);
+  const [checkedIn, setCheckedIn] = useState([]);
+  const [checkedOut, setCheckedOut] = useState([]);
+  const [pendingVisitors, setPending] = useState([]);
+  const [fromQueryDate, setQueryDate] = React.useState(
+    new Date(JSON.parse(localStorage.getItem("fromDate"))).toISOString()
+  );
+  const [toQueryDate, setToQueryDate] = React.useState(
+    new Date(JSON.parse(localStorage.getItem("toDate"))).toISOString()
   );
 
   const dispatch = useDispatch();
@@ -35,25 +40,45 @@ const Dashboard = () => {
     return state.frontDashboard;
   });
 
-  // console.log(dt.toLocaleDateString());
   React.useEffect(() => {
     if (state.success) {
-      setPending(state.payload.pendingGuests.length);
-      setVisitors(state.payload.Guests.length);
-      setCheckedIn(state.payload.checkedIn.length);
-      setCheckedOut(state.payload.checkedOut.length);
-      setAllStaff(state.payload.staff.length);
-      setPreBookedGuests(state.payload.prebooks.length);
-      setAllAdmin(state.payload.admin.length);
+      setPending(state.payload.pendingGuests);
+      setVisitors(state.payload.Guests);
+      setCheckedIn(state.payload.checkedIn);
+      setCheckedOut(state.payload.checkedOut);
+      setAllStaff(state.payload.staff);
+      setPreBookedGuests(state.payload.prebooks);
+      setAllAdmin(state.payload.admin);
     }
   }, [state]);
 
+  //identify current frontdesk
   React.useEffect(() => {
-    dispatch(getFrontDashboardData(queryDate));
-  }, [dispatch, queryDate]);
+    const typeofFrontDesk = JSON.parse(localStorage.getItem("frontdesk")).user
+      .isSuperAdmin;
+
+    if (typeofFrontDesk) {
+      dispatch(getCentralData(fromQueryDate, toQueryDate));
+    } else {
+      dispatch(getFrontDashboardData(fromQueryDate, toQueryDate));
+    }
+  }, [dispatch, fromQueryDate, toQueryDate]);
 
   const onChangeHandler = (e) => {
-    setQueryDate(e.target.value);
+    if (e.target.selectedIndex === 0) {
+      setQueryDate(new Date().toISOString());
+      setToQueryDate(new Date().toISOString());
+    } else if (e.target.selectedIndex === 1) {
+      setQueryDate(new Date().toISOString());
+      setToQueryDate(
+        new Date(new Date().setDate(new Date().getDate() - 7)).toISOString()
+      );
+    } else {
+      setQueryDate(new Date().toISOString());
+      setToQueryDate(
+        new Date(new Date().setDate(new Date().getDate() - 30)).toISOString()
+      );
+    }
   };
 
   return (
@@ -66,78 +91,66 @@ const Dashboard = () => {
             <div>
               <label htmlFor="">Pick a date</label>
               <Select onChange={onChangeHandler}>
-                <option value={new Date().toLocaleDateString()}>Today</option>
-                <option
-                  value={new Date(
-                    new Date().setDate(new Date().getDate() - 7)
-                  ).toLocaleDateString()}
-                >
-                  Last 7 days
-                </option>
-                <option
-                  value={new Date(
-                    new Date().setDate(new Date().getDate() - 30)
-                  ).toLocaleDateString()}
-                >
-                  Last 30 days
-                </option>
+                <option value="Today">Today</option>
+                <option value="Last 7 Days">Last 7 days</option>
+                <option value="">Last 30 days</option>
               </Select>
             </div>
           </div>
           <div className="dashboard__title__cards">
             <div className="cards">
               <DashboardCard
-                number={visitorsToday}
+                number={visitorsToday.length}
                 icon={<FaWalking />}
                 color="teal"
-                path="/front/vistors"
+                path="/frontdesk/dashboard/visitors"
               >
                 Visitors
               </DashboardCard>
               <DashboardCard
-                number={pendingVisitors}
+                number={pendingVisitors.length}
                 icon={<FaBusAlt />}
                 color="purple"
-                path="/admin/pending"
+                path="/frontdesk/dashboard/pending"
               >
                 Pending Visitors today
               </DashboardCard>
               <DashboardCard
-                number={checkedIn}
+                number={checkedIn.length}
                 icon={<FaCheck />}
                 color="orange"
-                path="/admin/checkedin"
+                path="/frontdesk/dashboard/checkedin"
               >
                 Checked-In Today
               </DashboardCard>
               <DashboardCard
-                number={checkedOut}
+                number={checkedOut.length}
                 icon={<FaShare />}
                 color="pink"
-                path="/admin/checkedout"
+                path="/frontdesk/dashboard/checkedout"
               >
                 Checked-Out
               </DashboardCard>
               <DashboardCard
-                number={preBookedGuests}
+                number={preBookedGuests.length}
                 icon={<FaBriefcase />}
                 color="green"
-                path="/admin/prebookedguests"
+                path="/frontdesk/dashboard/prebooks"
               >
                 PreBooked Guests
               </DashboardCard>
               <DashboardCard
-                number={allStaff}
+                number={allStaff.length}
                 icon={<FaUsers />}
                 color="blue"
-                path="/admin/allstaff"
+                path="/frontdesk/dashboard/allstaff"
               >
                 All Staff
               </DashboardCard>
               <DashboardCard
-                number={allAdmin}
+                number={allAdmin.length}
                 icon={<FaUsersCog />}
-                path="/admin/admins"
+                path="/frontdesk/dashboard/allfrontdesk"
                 color="red"
               >
                 Available Admins
@@ -155,11 +168,11 @@ const Dashboard = () => {
             }}
           >
             <Chart
-              visitors={visitorsToday}
-              pending={pendingVisitors}
-              checkedin={checkedIn}
-              checkedout={checkedOut}
-              allVisitors={preBookedGuests}
+              visitors={visitorsToday.length}
+              pending={pendingVisitors.length}
+              checkedin={checkedIn.length}
+              checkedout={checkedOut.length}
+              allVisitors={preBookedGuests.length}
             />
           </div>
         </div>

@@ -65,7 +65,7 @@ const tableIcons = {
 //   );
 // }
 
-function LogTable({ data, title = "Visitors Logs" }) {
+function StaffLogTable({ data }) {
   const [selectedRow, setSelectedRow] = React.useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [object, setObject] = React.useState({});
@@ -74,18 +74,18 @@ function LogTable({ data, title = "Visitors Logs" }) {
     onOpen();
   }
 
+  const frontdesk = JSON.parse(localStorage.getItem("frontdesk")).user
+    .isSuperAdmin;
+
   return (
     <>
       <MaterialTable
-        title={title}
+        title="All Staff"
         data={data}
         columns={[
-          { title: "Title", field: "title" },
           { title: "Full Name", field: "fullname" },
-          { title: "Company", field: "company" },
-          { title: "Purpose of Visit", field: "purpose" },
-          { title: "Host", field: "host[fullname]" },
-          { title: "Status", field: "status" },
+          { title: "Email Address", field: "email" },
+          { title: "Mobile Number", field: "mobile" },
         ]}
         onRowClick={(evt, selectedRow) => {
           setSelectedRow(selectedRow.tableData.id);
@@ -116,7 +116,7 @@ function LogTable({ data, title = "Visitors Logs" }) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Guest Details</ModalHeader>
+          <ModalHeader>Staff Details</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <table>
@@ -125,51 +125,27 @@ function LogTable({ data, title = "Visitors Logs" }) {
                 className="guest__table__log"
               >
                 <tr>
-                  <th>Title:</th>
-                  <td>{object.title}</td>
-                </tr>
-                <tr>
                   <th>Full Name:</th>
                   <td>
                     <td>{object["fullname"]}</td>
                   </td>
                 </tr>
                 <tr>
-                  <th>Company:</th>
-                  <td>{_.capitalize(object["company"])}</td>
-                </tr>
-                <tr>
-                  <th>Purpose of Visit:</th>
-                  <td>{_.capitalize(object["purpose"])}</td>
-                </tr>
-                <tr>
-                  <th>Date and Time of Visit:</th>
-                  <td>
-                    <Moment>{object["createdAt"]}</Moment>
-                  </td>
+                  <th>Email Address:</th>
+                  <td>{object["email"]}</td>
                 </tr>
               </tbody>
+              <tr>
+                <th>Mobile Number:</th>
+                <td>{object["mobile"]}</td>
+              </tr>
+              {frontdesk && (
+                <tr>
+                  <th>Office:</th>
+                  <td>{object["office"]}</td>
+                </tr>
+              )}
             </table>
-            <div>
-              <div className="guest__image">
-                <img
-                  src={object.photo}
-                  alt="guest"
-                  style={{ width: "300px" }}
-                />
-              </div>
-              <div>
-                {object.status === "Pending" && <h2>Awaiting Host</h2>}
-                {object.status === "Approved" && (
-                  <Button colorScheme="green" mt={4}>
-                    Check In Guest
-                  </Button>
-                )}
-                {object.status === "Rejected" && (
-                  <h2>Sorry! Your Host has refused to meet you!</h2>
-                )}
-              </div>
-            </div>
           </ModalBody>
 
           <ModalFooter>
@@ -183,4 +159,4 @@ function LogTable({ data, title = "Visitors Logs" }) {
   );
 }
 
-export default LogTable;
+export default StaffLogTable;

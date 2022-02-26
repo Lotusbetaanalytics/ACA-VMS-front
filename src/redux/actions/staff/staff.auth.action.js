@@ -41,7 +41,7 @@ export const startStaffLogin = (data, toast, navigate, setLoading) => {
       setLoading(false);
       toast({
         title: "An error Occured!",
-        description: `${err.response.data.message || err.message}`,
+        description: `${err.message || err.response.data.message}`,
         status: "error",
         duration: 9000,
         isClosable: true,

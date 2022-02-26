@@ -4,6 +4,7 @@ import NavbarFront from "../components/NavbarFront/NavbarFront";
 import "./screen.styles.css";
 import NewGuest from "./NewGuest";
 import VerifyGuest from "./VerifyGuest";
+import ReturningGuest from "./ReturningGuest";
 
 const GuestScreen = () => {
   return (
@@ -21,7 +22,7 @@ const GuestScreen = () => {
               <NewGuest />
             </TabPanel>
             <TabPanel>
-              <p>two!</p>
+              <ReturningGuest />
             </TabPanel>
             <TabPanel>
               <VerifyGuest />
