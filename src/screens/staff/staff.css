@@ -4,7 +4,6 @@
   background: #fff;
   display: flex;
   grid-gap: 40px;
-  border: 1px solid red;
 }
 
 .staff__dashboard__content {
@@ -64,16 +63,18 @@
   overflow: hidden;
   background: #fff;
   display: flex;
-  grid-gap: 40px;
+  /* grid-gap: 10px; */
 }
 
 .data__container {
   width: 90vw;
-  height: 100vh;
+  height: 80%;
   position: absolute;
   left: 15%;
+  bottom: 40%;
   padding: 10px;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 }
 .loader {
   width: 50%;

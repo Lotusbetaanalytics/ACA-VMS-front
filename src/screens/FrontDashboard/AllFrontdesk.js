@@ -14,7 +14,6 @@ const AllFrontDesk = () => {
 
   React.useEffect(() => {
     if (state.success) {
-      console.log(state.payload.admin);
       setVisitors(state.payload.admin);
     }
   }, [state]);

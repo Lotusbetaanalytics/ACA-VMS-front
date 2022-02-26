@@ -19,6 +19,10 @@ const PendingVisitors = () => {
     }
   }, [state]);
 
+  console.log(
+    new Date(JSON.parse(localStorage.getItem("toDate"))).toISOString()
+  );
+
   React.useEffect(() => {
     const typeofFrontDesk = JSON.parse(localStorage.getItem("frontdesk")).user
       .isSuperAdmin;

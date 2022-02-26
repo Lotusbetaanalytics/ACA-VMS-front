@@ -84,7 +84,6 @@ function FrontDeskLogTable({ data }) {
           { title: "First Name", field: "firstname" },
           { title: "Last Name", field: "lastname" },
           { title: "Email Address", field: "email" },
-          frontdesk && { title: "Office", field: "office" },
         ]}
         onRowClick={(evt, selectedRow) => {
           setSelectedRow(selectedRow.tableData.id);

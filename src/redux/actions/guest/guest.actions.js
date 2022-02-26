@@ -57,10 +57,10 @@ export const addGuest = (data, toast, setLoading) => {
   };
 };
 
-export const getStaffGuest = (setData, setLoading) => {
+export const getStaffGuest = (from, to) => {
   const config = {
     method: "get",
-    url: `${BASE_URL}/guest/staff`,
+    url: `${BASE_URL}/guest/staff/?from=${from}&to=${to}`,
     headers: {
       "Content-Type": "application/json",
       "access-token": JSON.parse(localStorage.getItem("staff")).token,
@@ -69,19 +69,17 @@ export const getStaffGuest = (setData, setLoading) => {
   return async (dispatch) => {
     try {
       const res = await axios(config);
-      setData(res.data.data);
+
       dispatch({
         type: GET_STAFF_GUEST,
         payload: res.data,
       });
-      setLoading(false);
     } catch (error) {
       dispatch({
         type: GET_STAFF_GUEST_FAIL,
         payload: error.message,
       });
     }
-    setLoading(false);
   };
 };
 

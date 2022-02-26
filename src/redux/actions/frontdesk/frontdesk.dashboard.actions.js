@@ -37,6 +37,8 @@ export const getFrontDashboardData = (from, to) => {
   };
 };
 export const getCentralData = (from, to) => {
+  localStorage.setItem("toDate", JSON.stringify(to));
+  localStorage.setItem("fromDate", JSON.stringify(from));
   const config = {
     method: "get",
     url: `${BASE_URL}/dashboard/central/?from=${from}&to=${to}`,

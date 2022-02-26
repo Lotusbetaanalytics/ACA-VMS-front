@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import {
   Table,
@@ -17,6 +17,7 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
+  Select,
 } from "@chakra-ui/react";
 import "./staff.css";
 import {
@@ -24,7 +25,7 @@ import {
   getStaffGuest,
   rejectGuest,
 } from "../../redux/actions/guest/guest.actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const StaffGuest = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,8 @@ const StaffGuest = () => {
   const [userPhoto, setUserPhoto] = React.useState("");
   const [id, setId] = React.useState("");
   const [guestStatus, setGuestStatus] = React.useState("Pending");
+  const [to, setTo] = useState(new Date(Date.now()).toISOString());
+  const [from, setFrom] = useState(new Date(Date.now()).toISOString());
 
   const toast = useToast();
   const clickHandler = (event) => {
@@ -43,15 +46,55 @@ const StaffGuest = () => {
     setGuestStatus(event.target.alt);
   };
 
+  const state = useSelector((state) => {
+    return state.staffGuests;
+  });
+
+  React.useEffect(() => {
+    if (state.success) {
+      setData(state.payload.guest);
+      setLoading(false);
+    }
+  }, [data, state]);
+
   React.useEffect(() => {
     setLoading(true);
-    dispatch(getStaffGuest(setData, setLoading));
-  }, [dispatch, guestStatus]);
+    dispatch(getStaffGuest(from, to));
+  }, [dispatch, guestStatus, from, to]);
+
+  const selectHandler = (e) => {
+    if (e.target.selectedIndex === 0) {
+      setTo(new Date(Date.now()).toISOString());
+      setFrom(new Date(Date.now()).toISOString());
+    } else if (e.target.selectedIndex === 1) {
+      setTo(new Date(Date.now()).toISOString());
+      setFrom(
+        new Date(new Date().setDate(new Date().getDate() - 7)).toISOString()
+      );
+    } else if (e.target.selectedIndex === 2) {
+      setTo(new Date(Date.now()).toISOString());
+      setFrom(
+        new Date(new Date().setDate(new Date().getDate() - 30)).toISOString()
+      );
+    }
+  };
 
   return (
     <div className="staff__guest_container">
       <Navbar />
       <div className="staff__guest__contents">
+        <div className="header__details">
+          <h2>My Guests</h2>
+          <div className="filter__date">
+            <span style={{ fontSize: "10px" }}>Pick a Date</span>
+            <Select variant="flushed" onChange={selectHandler}>
+              <option value="">Today</option>
+              <option value="">Last 7 Days</option>
+              <option value="">Last 30 Days</option>
+              {/* <option value="">Custom</option> */}
+            </Select>
+          </div>
+        </div>
         {loading ? (
           <div className="loader">
             <Spinner size="xl" />

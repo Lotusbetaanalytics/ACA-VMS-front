@@ -29,12 +29,13 @@ const Dashboard = () => {
   const [checkedOut, setCheckedOut] = useState([]);
   const [pendingVisitors, setPending] = useState([]);
   const [fromQueryDate, setQueryDate] = React.useState(
-    new Date(JSON.parse(localStorage.getItem("fromDate"))).toISOString()
+    new Date(Date.now()).toISOString()
   );
   const [toQueryDate, setToQueryDate] = React.useState(
-    new Date(JSON.parse(localStorage.getItem("toDate"))).toISOString()
+    new Date(Date.now()).toISOString()
   );
 
+  console.log(new Date(Date.now()).toISOString());
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return state.frontDashboard;
@@ -66,15 +67,15 @@ const Dashboard = () => {
 
   const onChangeHandler = (e) => {
     if (e.target.selectedIndex === 0) {
-      setQueryDate(new Date().toISOString());
-      setToQueryDate(new Date().toISOString());
+      setQueryDate(new Date(Date.now()).toISOString());
+      setToQueryDate(new Date(Date.now()).toISOString());
     } else if (e.target.selectedIndex === 1) {
-      setQueryDate(new Date().toISOString());
+      setQueryDate(new Date(Date.now()).toISOString());
       setToQueryDate(
         new Date(new Date().setDate(new Date().getDate() - 7)).toISOString()
       );
     } else {
-      setQueryDate(new Date().toISOString());
+      setQueryDate(new Date(Date.now()).toISOString());
       setToQueryDate(
         new Date(new Date().setDate(new Date().getDate() - 30)).toISOString()
       );
