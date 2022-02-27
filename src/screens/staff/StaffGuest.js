@@ -35,8 +35,14 @@ const StaffGuest = () => {
   const [userPhoto, setUserPhoto] = React.useState("");
   const [id, setId] = React.useState("");
   const [guestStatus, setGuestStatus] = React.useState("Pending");
-  const [to, setTo] = useState(new Date(Date.now()).toISOString());
-  const [from, setFrom] = useState(new Date(Date.now()).toISOString());
+  const [to, setTo] = useState(
+    new Date(Date.now()).toISOString() ||
+      new Date(JSON.parse(localStorage.getItem("to"))).toISOString()
+  );
+  const [from, setFrom] = useState(
+    new Date(Date.now()).toISOString() ||
+      new Date(JSON.parse(localStorage.getItem("from"))).toISOString()
+  );
 
   const toast = useToast();
   const clickHandler = (event) => {
@@ -67,13 +73,13 @@ const StaffGuest = () => {
       setTo(new Date(Date.now()).toISOString());
       setFrom(new Date(Date.now()).toISOString());
     } else if (e.target.selectedIndex === 1) {
-      setTo(new Date(Date.now()).toISOString());
-      setFrom(
+      setFrom(new Date(Date.now()).toISOString());
+      setTo(
         new Date(new Date().setDate(new Date().getDate() - 7)).toISOString()
       );
     } else if (e.target.selectedIndex === 2) {
-      setTo(new Date(Date.now()).toISOString());
-      setFrom(
+      setFrom(new Date(Date.now()).toISOString());
+      setTo(
         new Date(new Date().setDate(new Date().getDate() - 30)).toISOString()
       );
     }

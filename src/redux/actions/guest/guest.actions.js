@@ -58,6 +58,8 @@ export const addGuest = (data, toast, setLoading) => {
 };
 
 export const getStaffGuest = (from, to) => {
+  localStorage.setItem("from", from);
+  localStorage.setItem("to", to);
   const config = {
     method: "get",
     url: `${BASE_URL}/guest/staff/?from=${from}&to=${to}`,

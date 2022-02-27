@@ -114,7 +114,7 @@ const Dashboard = () => {
                 color="purple"
                 path="/frontdesk/dashboard/pending"
               >
-                Pending Visitors today
+                Pending Visitors
               </DashboardCard>
               <DashboardCard
                 number={checkedIn.length}
@@ -122,7 +122,7 @@ const Dashboard = () => {
                 color="orange"
                 path="/frontdesk/dashboard/checkedin"
               >
-                Checked-In Today
+                Checked-In Guests
               </DashboardCard>
               <DashboardCard
                 number={checkedOut.length}
@@ -130,7 +130,7 @@ const Dashboard = () => {
                 color="pink"
                 path="/frontdesk/dashboard/checkedout"
               >
-                Checked-Out
+                Checked-Out Guests
               </DashboardCard>
               <DashboardCard
                 number={preBookedGuests.length}

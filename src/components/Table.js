@@ -41,11 +41,11 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
-function ShowDataTable({ data }) {
+function ShowDataTable({ data, title = "Staff Guests" }) {
   const [selectedRow, setSelectedRow] = React.useState(null);
   return (
     <MaterialTable
-      title="My Pre Booked Guests"
+      title={title}
       data={data}
       columns={[
         { title: "Full Name", field: "fullname" },

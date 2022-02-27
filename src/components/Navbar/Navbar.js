@@ -4,18 +4,15 @@ import logo from "../../assets/logo.png";
 import {
   AiFillAppstore,
   AiOutlineUserSwitch,
-  AiOutlineSchedule,
-  AiOutlineUserAdd,
-  AiOutlineUsergroupAdd,
   AiOutlineTeam,
 } from "react-icons/ai";
 import { FaSignOutAlt } from "react-icons/fa";
 import "./Navbar.css";
-import { useDispatch } from "react-redux";
 import PageTitle from "../PageTitle/PagetitleStaff";
+import { FactCheckTwoTone } from "@mui/icons-material";
+import { InsertInvitationSharp, TimerSharp } from "@material-ui/icons";
 const Navbar = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const logoutHandler = () => {
     localStorage.removeItem("staff");
@@ -55,20 +52,26 @@ const Navbar = () => {
 
           <Link to="/staff/prebook" className="links__prebook">
             <div className="link">
-              <AiOutlineTeam />
+              <InsertInvitationSharp />
               <h3>PreBook A Guest</h3>
             </div>
           </Link>
-          <Link to="/admin/prebook" className="links__prebook">
+          <Link to="/staff/pending" className="links__prebook">
             <div className="link">
-              <AiOutlineTeam />
+              <TimerSharp />
               <h3>My Pending Guests</h3>
             </div>
           </Link>
-          <Link to="/admin/prebook" className="links__prebook">
+          <Link to="/staff/checkedin" className="links__prebook">
             <div className="link">
-              <AiOutlineTeam />
+              <FactCheckTwoTone />
               <h3>My Checked In Guests</h3>
+            </div>
+          </Link>
+          <Link to="/staff/checkedout" className="links__prebook">
+            <div className="link">
+              <FaSignOutAlt />
+              <h3>My Checked Out Guests</h3>
             </div>
           </Link>
           <Link to="/staff/guest" className="links__prebook">

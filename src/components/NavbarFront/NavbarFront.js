@@ -295,25 +295,12 @@ const NavbarFront = () => {
                   <h3>Dashboard</h3>
                 </div>
               </Link>
-              <Link to="/frontdesk/seeguest" className="links__guest">
-                <div className="link">
-                  <AiOutlineUserSwitch />
-                  <h3>Guest</h3>
-                </div>
-              </Link>
-
               <Link to="/logs" className="links__logs">
                 <div className="link">
                   <AiOutlineSchedule />
                   <h3>Logs</h3>
                 </div>
               </Link>
-              {/* <Link to="/frontdesk/register" className="links__add__admin">
-            <div className="link">
-              <AiOutlineUserAdd />
-              <h3>Add Admin</h3>
-            </div>
-          </Link> */}
               <button onClick={onOpen} className="links__add__staff">
                 <div className="link">
                   <AiOutlineUsergroupAdd />

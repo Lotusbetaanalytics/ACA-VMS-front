@@ -25,12 +25,14 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useToast,
   Button,
 } from "@chakra-ui/react";
-
+import axios from "axios";
 import Moment from "react-moment";
 import "moment-timezone";
 import _ from "lodash";
+import { BASE_URL } from "../redux/constants/constants";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -69,10 +71,69 @@ function LogTable({ data, title = "Visitors Logs" }) {
   const [selectedRow, setSelectedRow] = React.useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [object, setObject] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(false);
   function handleClick(event, rowData) {
     setObject(rowData);
     onOpen();
   }
+
+  const toast = useToast();
+
+  const checkedInHandler = (id) => {
+    setIsLoading(true);
+    axios
+      .patch(`${BASE_URL}/guest/checkin/${id}`)
+      .then((res) => {
+        setIsLoading(false);
+        toast({
+          title: "Check In Success ✔",
+          description: "Guest Checked In",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
+        });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        toast({
+          title: "Check In Failed ❌",
+          description: "Something went wrong",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
+        });
+      });
+  };
+
+  const checkedOutHandler = (id) => {
+    setIsLoading(true);
+    axios
+      .patch(`${BASE_URL}/guest/checkout/${id}`)
+      .then((res) => {
+        setIsLoading(false);
+        toast({
+          title: "Check Out Success ✔",
+          description: "Guest Checked Out",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
+        });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        toast({
+          title: "Check Out Failed ❌",
+          description: "Something went wrong",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
+        });
+      });
+  };
 
   return (
     <>
@@ -130,9 +191,7 @@ function LogTable({ data, title = "Visitors Logs" }) {
                 </tr>
                 <tr>
                   <th>Full Name:</th>
-                  <td>
-                    <td>{object["fullname"]}</td>
-                  </td>
+                  <td>{object["fullname"]}</td>
                 </tr>
                 <tr>
                   <th>Company:</th>
@@ -160,10 +219,37 @@ function LogTable({ data, title = "Visitors Logs" }) {
               </div>
               <div>
                 {object.status === "Pending" && <h2>Awaiting Host</h2>}
-                {object.status === "Approved" && (
-                  <Button colorScheme="green" mt={4}>
+                {object.status === "Approved" && !object.checkedIn ? (
+                  <Button
+                    colorScheme="green"
+                    mt={4}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      checkedInHandler(object._id);
+                    }}
+                    isLoading={isLoading}
+                    loadingText="Checking In..."
+                  >
                     Check In Guest
                   </Button>
+                ) : (
+                  ""
+                )}
+                {object.checkedIn && !object.checkedOut ? (
+                  <Button
+                    colorScheme="green"
+                    mt={4}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      checkedOutHandler(object._id);
+                    }}
+                    isLoading={isLoading}
+                    loadingText="Checking Out..."
+                  >
+                    Check Out
+                  </Button>
+                ) : (
+                  ""
                 )}
                 {object.status === "Rejected" && (
                   <h2>Sorry! Your Host has refused to meet you!</h2>

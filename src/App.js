@@ -22,6 +22,9 @@ import CheckedOutVisitors from "./screens/FrontDashboard/CheckedOut";
 import AllStaff from "./screens/FrontDashboard/AllStaff";
 import AllFrontDesk from "./screens/FrontDashboard/AllFrontdesk";
 import PreBookedVisitors from "./screens/FrontDashboard/PreBooked";
+import StaffCheckedOutGuests from "./screens/staff/StaffCheckedOutGuests";
+import StaffCheckedIn from "./screens/staff/StaffCheckedinGuests";
+import StaffPendingGuests from "./screens/staff/StaffPendingGuests";
 
 function App() {
   const [value, setValue] = React.useState("");
@@ -92,10 +95,23 @@ function App() {
               path="/frontdesk/dashboard"
               element={<FrontDeskDashboard />}
             />
+
+            {/* Staff Routes */}
             <Route exact path="/staff/dashboard" element={<StaffDashboard />} />
             <Route exact path="/staff/guest" element={<StaffGuest />} />
             <Route exact path="/staff/login" element={<StaffLogin />} />
             <Route exact path="/staff/prebook" element={<Prebook />} />
+            <Route exact path="/staff/checkedin" element={<StaffCheckedIn />} />
+            <Route
+              exact
+              path="/staff/checkedout"
+              element={<StaffCheckedOutGuests />}
+            />
+            <Route
+              exact
+              path="/staff/pending"
+              element={<StaffPendingGuests />}
+            />
             <Route
               exact
               path="/staff/viewprebook"

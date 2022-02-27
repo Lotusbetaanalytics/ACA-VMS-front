@@ -5,7 +5,7 @@ import ShowDataTable from "../../components/Table";
 import { getStaffGuest } from "../../redux/actions/guest/guest.actions";
 import "./staff.css";
 import { Spinner, Select } from "@chakra-ui/react";
-const ViewPreBookedGuest = () => {
+const StaffCheckedOutGuests = () => {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [to, setTo] = React.useState(new Date(Date.now()).toISOString());
@@ -17,7 +17,7 @@ const ViewPreBookedGuest = () => {
 
   React.useEffect(() => {
     if (state.success) {
-      setData(state.payload.prebook);
+      setData(state.payload.checkedOut);
       setLoading(false);
     }
   }, [data, state]);
@@ -58,6 +58,7 @@ const ViewPreBookedGuest = () => {
             position: "relative",
           }}
         >
+          <h2>My Checked In Guests</h2>
           <div className="filter__date">
             <span style={{ fontSize: "10px" }}>Pick a Date</span>
             <Select variant="flushed" onChange={selectHandler}>
@@ -79,11 +80,11 @@ const ViewPreBookedGuest = () => {
             />
           </div>
         ) : (
-          <ShowDataTable data={data} title="My Pre Booked Guests" />
+          <ShowDataTable data={data} title="Checked Out Guests" />
         )}
       </div>
     </div>
   );
 };
 
-export default ViewPreBookedGuest;
+export default StaffCheckedOutGuests;
