@@ -70,7 +70,7 @@ const NavbarFront = () => {
     e.preventDefault();
     setLoading(true);
     const data = {
-      office: item || staffOffice,
+      office: item || staffOffice || frontoffice,
       fullname,
       email,
       password,
@@ -377,7 +377,7 @@ const NavbarFront = () => {
                     <label htmlFor="">Office</label>
                     <Input
                       placeholder="Choose office..."
-                      value={staffOffice}
+                      value={frontoffice}
                       readOnly
                       // onChange={onChangeHandler}
                       required
