@@ -5,8 +5,8 @@ import {
   LOGIN_FAIL,
   CREATE_FRONT_DESK,
   CREATE_FRONT_DESK_FAIL,
+  BASE_URL,
 } from "../../constants/constants";
-const BASE_URL = "http://localhost:4000/api/v1";
 export const startLogin = (data, toast, navigate, setLoading) => {
   return async (dispatch) => {
     const config = {
