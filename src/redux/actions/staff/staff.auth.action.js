@@ -14,6 +14,7 @@ export const startStaffLogin = (data, toast, navigate, setLoading) => {
       method: "post",
       url: `/api/v1/staff/login`,
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       data: data,
@@ -53,8 +54,9 @@ export const addStaff = (data, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `/api/v1/staff`,
+      url: "/api/v1/staff",
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       data: data,
@@ -100,6 +102,7 @@ export const findStaff = (search, setSearch, office) => {
       url: `/api/v1/staff/?q=${search}`,
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
     };
 
@@ -127,6 +130,7 @@ export const findStaffInSameOffice = (search, setSearch) => {
       url: `/api/v1/staff/?q=${search}`,
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
     };
 
@@ -160,6 +164,7 @@ export const getAStaffFromToken = (
       url: `/api/v1/guest/?token=${search}`,
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
     };
 

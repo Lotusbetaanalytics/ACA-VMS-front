@@ -13,7 +13,7 @@ export const getFrontDashboardData = (from, to) => {
     url: `/api/v1/dashboard/all/?from=${from}&to=${to}`,
     headers: {
       contentType: "application/json",
-
+      Accept: "application/json",
       "access-token": JSON.parse(localStorage.getItem("frontdesk")).token,
     },
   };
@@ -44,6 +44,7 @@ export const getCentralData = (from, to) => {
     url: `/api/v1/dashboard/central/?from=${from}&to=${to}`,
     headers: {
       contentType: "application/json",
+      Accept: "application/json",
       "access-token": JSON.parse(localStorage.getItem("frontdesk")).token,
     },
   };

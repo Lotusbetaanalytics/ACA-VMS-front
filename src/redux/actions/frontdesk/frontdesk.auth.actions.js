@@ -13,6 +13,7 @@ export const startLogin = (data, toast, navigate, setLoading) => {
       url: `/api/v1/frontdesk/auth/login`,
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       data: data,
     };
@@ -54,6 +55,7 @@ export const createFrontDesk = (data, toast, setLoading) => {
       url: `/api/v1/frontdesk/auth`,
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       data: data,
     };
