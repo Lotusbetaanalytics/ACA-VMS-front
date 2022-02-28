@@ -6,6 +6,7 @@ import {
   START_GET_STAFF_PREBOOK,
   STAFF_DELETE_PREBOOK_FAIL,
   STAFF_DELETE_PREBOOK_SUCCESS,
+  BASE_URL,
 } from "../../constants/constants";
 
 import axios from "axios";
@@ -15,7 +16,7 @@ export const getStaffPreBooks = (setLoading, setData) => {
     const { token } = JSON.parse(localStorage.getItem("staff"));
     const config = {
       method: "get",
-      url: `/api/v1/prebook`,
+      url: `${BASE_URL}/prebook`,
       headers: {
         "Content-Type": "application/json",
 
@@ -47,7 +48,7 @@ export const getStaffPreBooks = (setLoading, setData) => {
 export const prebookGuest = (data, setLoading, toast) => {
   const config = {
     method: "post",
-    url: `/api/v1/prebook`,
+    url: `${BASE_URL}/prebook`,
     headers: {
       "Content-Type": "application/json",
       "access-token": JSON.parse(localStorage.getItem("staff")).token,
@@ -91,7 +92,7 @@ export const prebookGuest = (data, setLoading, toast) => {
 export const deletePreBook = (id, setLoading, toast) => {
   const config = {
     method: "delete",
-    url: `/api/v1/prebook/${id}`,
+    url: `${BASE_URL}/prebook/${id}`,
     headers: {
       "Content-Type": "application/json",
 

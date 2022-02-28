@@ -5,12 +5,13 @@ import {
   LOGIN_FAIL,
   CREATE_FRONT_DESK,
   CREATE_FRONT_DESK_FAIL,
+  BASE_URL,
 } from "../../constants/constants";
 export const startLogin = (data, toast, navigate, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `/api/v1/frontdesk/auth/login`,
+      url: `${BASE_URL}/frontdesk/auth/login`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -52,7 +53,7 @@ export const createFrontDesk = (data, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `/api/v1/frontdesk/auth`,
+      url: `${BASE_URL}/frontdesk/auth`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

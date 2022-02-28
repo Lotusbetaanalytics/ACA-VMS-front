@@ -8,13 +8,14 @@ import {
   APPROVE_GUEST_FAIL,
   REJECT_GUEST,
   REJECT_GUEST_FAIL,
+  BASE_URL,
 } from "../../constants/constants";
 
 export const addGuest = (data, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `/api/v1/guest/new`,
+      url: `${BASE_URL}/guest/new`,
       headers: {
         "Content-Type": "application/json",
 
@@ -62,7 +63,7 @@ export const getStaffGuest = (from, to) => {
   localStorage.setItem("to", to);
   const config = {
     method: "get",
-    url: `/api/v1/guest/staff/?from=${from}&to=${to}`,
+    url: `${BASE_URL}/guest/staff/?from=${from}&to=${to}`,
     headers: {
       "Content-Type": "application/json",
       "access-token": JSON.parse(localStorage.getItem("staff")).token,
@@ -89,7 +90,7 @@ export const approveGuest = (id, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "patch",
-      url: `/api/v1/guest/approve/${id}`,
+      url: `${BASE_URL}/guest/approve/${id}`,
       headers: {
         "Content-Type": "application/json",
 
@@ -134,7 +135,7 @@ export const rejectGuest = (id, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "patch",
-      url: `api/v1/guest/reject/${id}`,
+      url: `${BASE_URL}/guest/reject/${id}`,
       headers: {
         "Content-Type": "application/json",
 

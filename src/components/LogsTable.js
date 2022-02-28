@@ -33,6 +33,7 @@ import axios from "axios";
 import Moment from "react-moment";
 import "moment-timezone";
 import _ from "lodash";
+import { BASE_URL } from "../redux/constants/constants";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -88,7 +89,7 @@ function LogTable({ data, title = "Visitors Logs" }) {
   const checkedInHandler = (id) => {
     setIsLoading(true);
     axios
-      .patch(`/api/v1/guest/checkin/${id}`)
+      .patch(`${BASE_URL}/guest/checkin/${id}`)
       .then((res) => {
         setIsLoading(false);
         toast({
@@ -121,7 +122,7 @@ function LogTable({ data, title = "Visitors Logs" }) {
   const checkedOutHandler = (id) => {
     setIsLoading(true);
     axios
-      .patch(`/api/v1/guest/checkout/${id}`)
+      .patch(`${BASE_URL}/guest/checkout/${id}`)
       .then((res) => {
         setIsLoading(false);
         toast({

@@ -3,6 +3,7 @@ import {
   GET_FRONT_DASHBOARD_SUCCESS,
   GET_FRONT_DASHBOARD_FAIL,
   GET_FRONT_DASHBOARD_START,
+  BASE_URL,
 } from "../../constants/constants";
 
 export const getFrontDashboardData = (from, to) => {
@@ -10,7 +11,7 @@ export const getFrontDashboardData = (from, to) => {
   localStorage.setItem("fromDate", JSON.stringify(from));
   const config = {
     method: "get",
-    url: `/api/v1/dashboard/all/?from=${from}&to=${to}`,
+    url: `${BASE_URL}/dashboard/all/?from=${from}&to=${to}`,
     headers: {
       contentType: "application/json",
       Accept: "application/json",
@@ -41,7 +42,7 @@ export const getCentralData = (from, to) => {
   localStorage.setItem("fromDate", JSON.stringify(from));
   const config = {
     method: "get",
-    url: `/api/v1/dashboard/central/?from=${from}&to=${to}`,
+    url: `${BASE_URL}/dashboard/central/?from=${from}&to=${to}`,
     headers: {
       contentType: "application/json",
       Accept: "application/json",

@@ -4,12 +4,13 @@ import {
   GET_OFFICE_SUCCESS,
   ADD_OFFICE,
   ADD_OFFICE_FAIL,
+  BASE_URL,
 } from "../../constants/constants";
 
 export const getOffice = (search, setSearch, setShow) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`/api/v1/office/search/?q=${search}`);
+      const res = await axios.get(`${BASE_URL}/office/search/?q=${search}`);
       setSearch(res.data.data);
       dispatch({
         type: GET_OFFICE_SUCCESS,
@@ -29,7 +30,7 @@ export const addOffice = (data, setLoading, toast) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `/api/v1/office`,
+      url: `${BASE_URL}/office`,
       headers: {
         "Content-Type": "application/json",
       },

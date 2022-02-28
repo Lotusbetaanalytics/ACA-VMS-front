@@ -2,7 +2,6 @@
   "name": "acavmsfront",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://acavms.herokuapp.com",
   "dependencies": {
     "@chakra-ui/icons": "^1.1.5",
     "@chakra-ui/react": "^1.8.3",

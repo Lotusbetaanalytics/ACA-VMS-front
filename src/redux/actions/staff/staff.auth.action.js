@@ -7,12 +7,13 @@ import {
   ADD_USER_FAIL,
   FIND_STAFF,
   FIND_STAFF_FAIL,
+  BASE_URL,
 } from "../../constants/constants";
 export const startStaffLogin = (data, toast, navigate, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `/api/v1/staff/login`,
+      url: `${BASE_URL}/staff/login`,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -54,7 +55,7 @@ export const addStaff = (data, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: "/api/v1/staff",
+      url: `${BASE_URL}/staff`,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -99,7 +100,7 @@ export const findStaff = (search, setSearch, office) => {
   return async (dispatch) => {
     const config = {
       method: "get",
-      url: `/api/v1/staff/?q=${search}`,
+      url: `${BASE_URL}/staff/?q=${search}`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -127,7 +128,7 @@ export const findStaffInSameOffice = (search, setSearch) => {
   return async (dispatch) => {
     const config = {
       method: "get",
-      url: `/api/v1/staff/?q=${search}`,
+      url: `${BASE_URL}/staff/?q=${search}`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -161,7 +162,7 @@ export const getAStaffFromToken = (
   return async (dispatch) => {
     const config = {
       method: "get",
-      url: `/api/v1/guest/?token=${search}`,
+      url: `${BASE_URL}/guest/?token=${search}`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
