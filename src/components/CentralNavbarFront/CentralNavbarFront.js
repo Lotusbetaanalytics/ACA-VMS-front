@@ -8,7 +8,6 @@ import {
   AiOutlineSchedule,
   AiOutlineUserAdd,
   AiOutlineUsergroupAdd,
-  AiOutlineTeam,
 } from "react-icons/ai";
 import { FaSignOutAlt } from "react-icons/fa";
 import "./NavbarFront.css";

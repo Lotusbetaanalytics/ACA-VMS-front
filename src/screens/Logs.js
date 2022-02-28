@@ -29,6 +29,7 @@ const Logs = () => {
     if (frontDesk.user.isSuperAdmin) {
       setLoading(true);
       dispatch(getAllLogs(setCentralReceptionLogs, setLoading));
+      console.log(setFrontisSuperFrontDesk);
     }
     if (!frontDesk.user.isSuperAdmin) {
       setLoading(true);

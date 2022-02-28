@@ -28,9 +28,9 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import Moment from "react-moment";
-import "moment-timezone";
-import _ from "lodash";
+// import Moment from "react-moment";
+// import "moment-timezone";
+// import _ from "lodash";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -71,6 +71,7 @@ function FrontDeskLogTable({ data }) {
   const [object, setObject] = React.useState({});
   function handleClick(event, rowData) {
     setObject(rowData);
+    console.log(selectedRow);
     onOpen();
   }
   const frontdesk = JSON.parse(localStorage.getItem("frontdesk")).user

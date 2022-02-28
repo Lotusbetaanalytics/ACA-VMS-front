@@ -1,5 +1,5 @@
 import { Button, Input, useToast } from "@chakra-ui/react";
-import { HouseTwoTone, LocalPostOfficeSharp } from "@material-ui/icons";
+import { HouseTwoTone } from "@material-ui/icons";
 import React from "react";
 import { useDispatch } from "react-redux";
 import NavbarFront from "../../components/NavbarFront/NavbarFront";

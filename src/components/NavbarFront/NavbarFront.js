@@ -8,7 +8,6 @@ import {
   AiOutlineSchedule,
   AiOutlineUserAdd,
   AiOutlineUsergroupAdd,
-  AiOutlineTeam,
 } from "react-icons/ai";
 import { FaSignOutAlt } from "react-icons/fa";
 import "./NavbarFront.css";
@@ -63,6 +62,7 @@ const NavbarFront = () => {
     if (frontdesk) {
       // setSuperAdmin(frontdesk.user.isSuperAdmin);
       setStaffOffice(frontdesk.user.office);
+      console.log(setSuperAdminOffice);
     }
   }, [frontdesk, staffOffice]);
 

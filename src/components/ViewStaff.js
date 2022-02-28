@@ -28,10 +28,6 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import Moment from "react-moment";
-import "moment-timezone";
-import _ from "lodash";
-
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -71,6 +67,7 @@ function StaffLogTable({ data }) {
   const [object, setObject] = React.useState({});
   function handleClick(event, rowData) {
     setObject(rowData);
+    console.log(selectedRow);
     onOpen();
   }
 
