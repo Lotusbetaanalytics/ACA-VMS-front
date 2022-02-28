@@ -2,7 +2,7 @@ import { useToast } from "@chakra-ui/react";
 import React from "react";
 import io from "socket.io-client";
 
-const socket = io.connect("https://acavms.herokuapp.com/");
+const socket = io.connect("/");
 
 const Notification = ({ state }) => {
   const toast = useToast();

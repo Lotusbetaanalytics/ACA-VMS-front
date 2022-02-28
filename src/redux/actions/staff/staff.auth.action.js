@@ -7,16 +7,15 @@ import {
   ADD_USER_FAIL,
   FIND_STAFF,
   FIND_STAFF_FAIL,
-  BASE_URL,
 } from "../../constants/constants";
-// BASE_URL = "http://localhost:4000/api/v1/staff";
 export const startStaffLogin = (data, toast, navigate, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `${BASE_URL}/staff/login`,
+      url: `/api/v1/staff/login`,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       data: data,
     };
@@ -55,9 +54,10 @@ export const addStaff = (data, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `${BASE_URL}/staff`,
+      url: `/api/v1/staff`,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       data: data,
     };
@@ -99,9 +99,10 @@ export const findStaff = (search, setSearch, office) => {
   return async (dispatch) => {
     const config = {
       method: "get",
-      url: `${BASE_URL}/staff/?q=${search}`,
+      url: `/api/v1/staff/?q=${search}`,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     };
 
@@ -126,9 +127,10 @@ export const findStaffInSameOffice = (search, setSearch) => {
   return async (dispatch) => {
     const config = {
       method: "get",
-      url: `${BASE_URL}/staff/?q=${search}`,
+      url: `/api/v1/staff/?q=${search}`,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     };
 
@@ -159,15 +161,15 @@ export const getAStaffFromToken = (
   return async (dispatch) => {
     const config = {
       method: "get",
-      url: `${BASE_URL}/guest/?token=${search}`,
+      url: `/api/v1/guest/?token=${search}`,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     };
 
     try {
       const res = await axios(config);
-      console.log(res.data.data);
       setSearch(res.data.data);
       dispatch({
         type: FIND_STAFF,

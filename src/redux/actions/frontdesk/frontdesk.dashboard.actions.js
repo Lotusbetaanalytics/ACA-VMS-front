@@ -1,6 +1,5 @@
 import axios from "axios";
 import {
-  BASE_URL,
   GET_FRONT_DASHBOARD_SUCCESS,
   GET_FRONT_DASHBOARD_FAIL,
   GET_FRONT_DASHBOARD_START,
@@ -11,9 +10,10 @@ export const getFrontDashboardData = (from, to) => {
   localStorage.setItem("fromDate", JSON.stringify(from));
   const config = {
     method: "get",
-    url: `${BASE_URL}/dashboard/all/?from=${from}&to=${to}`,
+    url: `/api/v1/dashboard/all/?from=${from}&to=${to}`,
     headers: {
       contentType: "application/json",
+      "Access-Control-Allow-Origin": "*",
       "access-token": JSON.parse(localStorage.getItem("frontdesk")).token,
     },
   };
@@ -41,10 +41,11 @@ export const getCentralData = (from, to) => {
   localStorage.setItem("fromDate", JSON.stringify(from));
   const config = {
     method: "get",
-    url: `${BASE_URL}/dashboard/central/?from=${from}&to=${to}`,
+    url: `/api/v1/dashboard/central/?from=${from}&to=${to}`,
     headers: {
       contentType: "application/json",
       "access-token": JSON.parse(localStorage.getItem("frontdesk")).token,
+      "Access-Control-Allow-Origin": "*",
     },
   };
   return async (dispatch) => {

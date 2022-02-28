@@ -8,16 +8,16 @@ import {
   APPROVE_GUEST_FAIL,
   REJECT_GUEST,
   REJECT_GUEST_FAIL,
-  BASE_URL,
 } from "../../constants/constants";
 
 export const addGuest = (data, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "post",
-      url: `${BASE_URL}/guest/new`,
+      url: `/api/v1/guest/new`,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
         "access-token": JSON.parse(localStorage.getItem("frontdesk")).token,
       },
       data: data,
@@ -62,10 +62,11 @@ export const getStaffGuest = (from, to) => {
   localStorage.setItem("to", to);
   const config = {
     method: "get",
-    url: `${BASE_URL}/guest/staff/?from=${from}&to=${to}`,
+    url: `/api/v1/guest/staff/?from=${from}&to=${to}`,
     headers: {
       "Content-Type": "application/json",
       "access-token": JSON.parse(localStorage.getItem("staff")).token,
+      "Access-Control-Allow-Origin": "*",
     },
   };
   return async (dispatch) => {
@@ -89,9 +90,10 @@ export const approveGuest = (id, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "patch",
-      url: `${BASE_URL}/guest/approve/${id}`,
+      url: `/api/v1/guest/approve/${id}`,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
         "access-token": JSON.parse(localStorage.getItem("staff")).token,
       },
     };
@@ -133,9 +135,10 @@ export const rejectGuest = (id, toast, setLoading) => {
   return async (dispatch) => {
     const config = {
       method: "patch",
-      url: `${BASE_URL}/guest/reject/${id}`,
+      url: `api/v1/guest/reject/${id}`,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
         "access-token": JSON.parse(localStorage.getItem("staff")).token,
       },
     };

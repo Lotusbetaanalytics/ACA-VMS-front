@@ -6,7 +6,6 @@ import {
   START_GET_STAFF_PREBOOK,
   STAFF_DELETE_PREBOOK_FAIL,
   STAFF_DELETE_PREBOOK_SUCCESS,
-  BASE_URL,
 } from "../../constants/constants";
 
 import axios from "axios";
@@ -16,9 +15,10 @@ export const getStaffPreBooks = (setLoading, setData) => {
     const { token } = JSON.parse(localStorage.getItem("staff"));
     const config = {
       method: "get",
-      url: `${BASE_URL}/prebook`,
+      url: `/api/v1/prebook`,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
         "access-token": token,
       },
     };
@@ -47,10 +47,11 @@ export const getStaffPreBooks = (setLoading, setData) => {
 export const prebookGuest = (data, setLoading, toast) => {
   const config = {
     method: "post",
-    url: `${BASE_URL}/prebook`,
+    url: `/api/v1/prebook`,
     headers: {
       "Content-Type": "application/json",
       "access-token": JSON.parse(localStorage.getItem("staff")).token,
+      "Access-Control-Allow-Origin": "*",
     },
     data: data,
   };
@@ -91,9 +92,10 @@ export const prebookGuest = (data, setLoading, toast) => {
 export const deletePreBook = (id, setLoading, toast) => {
   const config = {
     method: "delete",
-    url: `${BASE_URL}/prebook/${id}`,
+    url: `/api/v1/prebook/${id}`,
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
       "access-token": JSON.parse(localStorage.getItem("staff")).token,
     },
   };
