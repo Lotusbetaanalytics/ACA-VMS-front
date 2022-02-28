@@ -76,6 +76,7 @@ function LogTable({ data, title = "Visitors Logs" }) {
   const [isLoading, setIsLoading] = React.useState(false);
   function handleClick(event, rowData) {
     setObject(rowData);
+    console.log(selectedRow);
     onOpen();
   }
 
@@ -101,8 +102,9 @@ function LogTable({ data, title = "Visitors Logs" }) {
         });
         setTagNumber("");
         setTimeout(() => {
-          onClose();
-        }, 1000);
+          // onClose();
+          window.location.reload();
+        }, 500);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -133,8 +135,9 @@ function LogTable({ data, title = "Visitors Logs" }) {
         });
         setTagNumber("");
         setTimeout(() => {
-          onClose();
-        }, 1000);
+          // onClose();
+          window.location.reload();
+        }, 500);
       })
       .catch((err) => {
         setIsLoading(false);

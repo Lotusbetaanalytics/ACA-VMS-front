@@ -22,6 +22,8 @@ import { getOffice } from "../redux/actions/office/office.actions";
 import FilterOffice from "../components/AutoCompleteOffice";
 import AutoCompleteContext from "../context/AutoCompleteContext";
 import "./staff/staff.css";
+import io from "socket.io-client";
+const socket = io.connect("https://acavms.herokuapp.com/");
 const NewGuest = () => {
   const { value, setValue } = React.useContext(AutoCompleteContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -84,6 +86,7 @@ const NewGuest = () => {
     setStaffId("");
     setStaffName("");
     setValue("");
+    socket.emit("message", "New Guest");
   };
 
   React.useEffect(() => {
