@@ -27,6 +27,7 @@ import {
   useDisclosure,
   useToast,
   Button,
+  Input,
 } from "@chakra-ui/react";
 import axios from "axios";
 import Moment from "react-moment";
@@ -71,6 +72,7 @@ function LogTable({ data, title = "Visitors Logs" }) {
   const [selectedRow, setSelectedRow] = React.useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [object, setObject] = React.useState({});
+  const [tagNumber, setTagNumber] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   function handleClick(event, rowData) {
     setObject(rowData);
@@ -78,6 +80,10 @@ function LogTable({ data, title = "Visitors Logs" }) {
   }
 
   const toast = useToast();
+
+  const handleTagNumber = (event) => {
+    setTagNumber(event.target.value);
+  };
 
   const checkedInHandler = (id) => {
     setIsLoading(true);
@@ -93,6 +99,10 @@ function LogTable({ data, title = "Visitors Logs" }) {
           isClosable: true,
           position: "top-right",
         });
+        setTagNumber("");
+        setTimeout(() => {
+          onClose();
+        }, 1000);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -121,6 +131,10 @@ function LogTable({ data, title = "Visitors Logs" }) {
           isClosable: true,
           position: "top-right",
         });
+        setTagNumber("");
+        setTimeout(() => {
+          onClose();
+        }, 1000);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -220,34 +234,60 @@ function LogTable({ data, title = "Visitors Logs" }) {
               <div>
                 {object.status === "Pending" && <h2>Awaiting Host</h2>}
                 {object.status === "Approved" && !object.checkedIn ? (
-                  <Button
-                    colorScheme="green"
-                    mt={4}
-                    onClick={(e) => {
+                  <form
+                    onSubmit={(e) => {
                       e.preventDefault();
                       checkedInHandler(object._id);
                     }}
-                    isLoading={isLoading}
-                    loadingText="Checking In..."
                   >
-                    Check In Guest
-                  </Button>
+                    <div style={{ width: "200px" }}>
+                      <label htmlFor="">Tag Number</label>
+                      <Input
+                        placeholder="Tag Number"
+                        value={tagNumber}
+                        required
+                        onChange={handleTagNumber}
+                      />
+                    </div>
+                    <Button
+                      colorScheme="green"
+                      mt={4}
+                      isLoading={isLoading}
+                      loadingText="Checking In..."
+                      type="submit"
+                    >
+                      Check In Guest
+                    </Button>
+                  </form>
                 ) : (
                   ""
                 )}
                 {object.checkedIn && !object.checkedOut ? (
-                  <Button
-                    colorScheme="green"
-                    mt={4}
-                    onClick={(e) => {
+                  <form
+                    onSubmit={(e) => {
                       e.preventDefault();
                       checkedOutHandler(object._id);
                     }}
-                    isLoading={isLoading}
-                    loadingText="Checking Out..."
                   >
-                    Check Out
-                  </Button>
+                    <div style={{ width: "200px" }}>
+                      <label htmlFor="">Tag Number</label>
+                      <Input
+                        placeholder="Tag Number"
+                        value={tagNumber}
+                        required
+                        onChange={handleTagNumber}
+                      />
+                    </div>
+                    <Button
+                      colorScheme="green"
+                      mt={4}
+                      isLoading={isLoading}
+                      loadingText="Checking Out..."
+                      type="submit"
+                    >
+                      Check Out
+                    </Button>
+                  </form>
                 ) : (
                   ""
                 )}

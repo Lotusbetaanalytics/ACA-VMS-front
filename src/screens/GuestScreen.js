@@ -5,6 +5,7 @@ import "./screen.styles.css";
 import NewGuest from "./NewGuest";
 import VerifyGuest from "./VerifyGuest";
 import ReturningGuest from "./ReturningGuest";
+import NewDelivery from "./staff/Delivery";
 
 const GuestScreen = () => {
   return (
@@ -16,6 +17,7 @@ const GuestScreen = () => {
             <Tab>Create New Guest</Tab>
             <Tab>Returning Guest</Tab>
             <Tab>Verify Guest Token</Tab>
+            <Tab>Delivery Personnel</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -26,6 +28,9 @@ const GuestScreen = () => {
             </TabPanel>
             <TabPanel>
               <VerifyGuest />
+            </TabPanel>
+            <TabPanel>
+              <NewDelivery />
             </TabPanel>
           </TabPanels>
         </Tabs>
