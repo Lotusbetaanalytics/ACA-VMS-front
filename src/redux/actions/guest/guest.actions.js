@@ -17,7 +17,7 @@ export const addGuest = (data, toast, setLoading) => {
       url: `/api/v1/guest/new`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+
         "access-token": JSON.parse(localStorage.getItem("frontdesk")).token,
       },
       data: data,
@@ -66,7 +66,6 @@ export const getStaffGuest = (from, to) => {
     headers: {
       "Content-Type": "application/json",
       "access-token": JSON.parse(localStorage.getItem("staff")).token,
-      "Access-Control-Allow-Origin": "*",
     },
   };
   return async (dispatch) => {
@@ -93,7 +92,7 @@ export const approveGuest = (id, toast, setLoading) => {
       url: `/api/v1/guest/approve/${id}`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+
         "access-token": JSON.parse(localStorage.getItem("staff")).token,
       },
     };
@@ -138,7 +137,7 @@ export const rejectGuest = (id, toast, setLoading) => {
       url: `api/v1/guest/reject/${id}`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+
         "access-token": JSON.parse(localStorage.getItem("staff")).token,
       },
     };

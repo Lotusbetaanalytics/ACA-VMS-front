@@ -18,7 +18,7 @@ export const getStaffPreBooks = (setLoading, setData) => {
       url: `/api/v1/prebook`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+
         "access-token": token,
       },
     };
@@ -51,7 +51,6 @@ export const prebookGuest = (data, setLoading, toast) => {
     headers: {
       "Content-Type": "application/json",
       "access-token": JSON.parse(localStorage.getItem("staff")).token,
-      "Access-Control-Allow-Origin": "*",
     },
     data: data,
   };
@@ -95,7 +94,7 @@ export const deletePreBook = (id, setLoading, toast) => {
     url: `/api/v1/prebook/${id}`,
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+
       "access-token": JSON.parse(localStorage.getItem("staff")).token,
     },
   };

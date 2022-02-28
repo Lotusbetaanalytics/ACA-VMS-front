@@ -15,7 +15,6 @@ export const startStaffLogin = (data, toast, navigate, setLoading) => {
       url: `/api/v1/staff/login`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
       data: data,
     };
@@ -57,7 +56,6 @@ export const addStaff = (data, toast, setLoading) => {
       url: `/api/v1/staff`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
       data: data,
     };
@@ -102,7 +100,6 @@ export const findStaff = (search, setSearch, office) => {
       url: `/api/v1/staff/?q=${search}`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
     };
 
@@ -130,7 +127,6 @@ export const findStaffInSameOffice = (search, setSearch) => {
       url: `/api/v1/staff/?q=${search}`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
     };
 
@@ -164,7 +160,6 @@ export const getAStaffFromToken = (
       url: `/api/v1/guest/?token=${search}`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
     };
 

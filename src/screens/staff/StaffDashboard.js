@@ -5,7 +5,6 @@ import "./staff.css";
 import { Select } from "@chakra-ui/react";
 import { getStaffGuest } from "../../redux/actions/guest/guest.actions";
 import { useDispatch, useSelector } from "react-redux";
-import Notification from "../../components/Notification";
 
 const StaffDashboard = () => {
   const [to, setTo] = useState(new Date(Date.now()).toISOString());
@@ -55,7 +54,6 @@ const StaffDashboard = () => {
         <Navbar />
 
         <div className="staff__dashboard__content">
-          <Notification state={state} />
           <div className="header__details">
             <h2>See what your Dashboard looks like today.</h2>
             <div className="filter__date">

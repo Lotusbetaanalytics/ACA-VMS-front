@@ -13,7 +13,7 @@ export const getFrontDashboardData = (from, to) => {
     url: `/api/v1/dashboard/all/?from=${from}&to=${to}`,
     headers: {
       contentType: "application/json",
-      "Access-Control-Allow-Origin": "*",
+
       "access-token": JSON.parse(localStorage.getItem("frontdesk")).token,
     },
   };
@@ -45,7 +45,6 @@ export const getCentralData = (from, to) => {
     headers: {
       contentType: "application/json",
       "access-token": JSON.parse(localStorage.getItem("frontdesk")).token,
-      "Access-Control-Allow-Origin": "*",
     },
   };
   return async (dispatch) => {

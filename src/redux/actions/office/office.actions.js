@@ -32,7 +32,6 @@ export const addOffice = (data, setLoading, toast) => {
       url: `/api/v1/office`,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
       data: data,
     };
