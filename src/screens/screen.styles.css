@@ -67,7 +67,7 @@
 
 .guest__verified__details {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   margin-top: 40px;
   justify-content: space-between;
   height: 40vh;
