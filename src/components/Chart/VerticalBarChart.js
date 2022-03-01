@@ -31,7 +31,7 @@ export default function VerticalChart({
     labels,
     datasets: [
       {
-        label: `Visitors ${title}`,
+        label: [`Visitors ${title}`],
         data: [visitors, checkedIn, preBooked],
         backgroundColor: [
           "rgba(255, 99, 132, 0.5)",
@@ -52,5 +52,5 @@ export default function VerticalChart({
       },
     },
   };
-  return <Bar options={options} data={data} />;
+  return <Bar options={options} data={data} height="1190px" width="1350px" />;
 }
