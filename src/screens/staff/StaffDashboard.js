@@ -5,6 +5,7 @@ import "./staff.css";
 import { Select } from "@chakra-ui/react";
 import { getStaffGuest } from "../../redux/actions/guest/guest.actions";
 import { useDispatch, useSelector } from "react-redux";
+import VerticalChart from "../../components/Chart/VerticalBarChart";
 
 const StaffDashboard = () => {
   const [to, setTo] = useState(new Date(Date.now()).toISOString());
@@ -12,17 +13,21 @@ const StaffDashboard = () => {
   const [totalVisitors, setTotalVisitors] = useState(null);
   const [checkedIn, setCheckedIn] = useState(null);
   const [prebook, setPrebook] = useState(null);
+  const [title, setTitle] = useState("");
 
   const selectHandler = (e) => {
     if (e.target.selectedIndex === 0) {
+      setTitle("Today");
       setTo(new Date(Date.now()).toISOString());
       setFrom(new Date(Date.now()).toISOString());
     } else if (e.target.selectedIndex === 1) {
+      setTitle("Last 7 Days");
       setFrom(new Date(Date.now()).toISOString());
       setTo(
         new Date(new Date().setDate(new Date().getDate() - 7)).toISOString()
       );
     } else if (e.target.selectedIndex === 2) {
+      setTitle("Last 30 Days");
       setFrom(new Date(Date.now()).toISOString());
       setTo(
         new Date(new Date().setDate(new Date().getDate() - 30)).toISOString()
@@ -69,7 +74,15 @@ const StaffDashboard = () => {
           <div className="dashboard__smallcards">
             <SmallCard value={totalVisitors} title="TOTAL VISITORS" />
             <SmallCard value={checkedIn} title="CHECKED IN VISITORS" />
-            <SmallCard value={prebook} title="INVITEES" />
+            <SmallCard value={prebook} title="PRE BOOKED GUESTS" />
+          </div>
+          <div className="chart">
+            <VerticalChart
+              visitors={totalVisitors}
+              checkedIn={checkedIn}
+              preBooked={prebook}
+              title={title}
+            />
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ const ReturningGuest = () => {
       <label htmlFor="">Enter Guest Name</label>
       <div className="verify__token">
         <Input
-          placeholder="Enter Guest Token"
+          placeholder="Enter Guest Name"
           value=""
           onChange={(e) => {
             // setSearch(e.target.value);
@@ -22,7 +22,7 @@ const ReturningGuest = () => {
           Find Guest
         </Button>
       </div>
-      ReturningGuest
+      Returning Guest
     </div>
   );
 };
