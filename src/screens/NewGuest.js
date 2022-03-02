@@ -72,6 +72,7 @@ const NewGuest = () => {
       isGroup,
       photo,
     };
+
     dispatch(addGuest(data, toast, setLoading));
     setFullName("");
     setEmail("");

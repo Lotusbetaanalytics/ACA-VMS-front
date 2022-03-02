@@ -52,5 +52,5 @@ export default function VerticalChart({
       },
     },
   };
-  return <Bar options={options} data={data} height="1190px" width="1350px" />;
+  return <Bar options={options} data={data} />;
 }

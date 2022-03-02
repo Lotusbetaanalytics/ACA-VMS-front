@@ -26,7 +26,6 @@ export const addGuest = (data, toast, setLoading) => {
 
     try {
       const res = await axios(config);
-      console.log(res.data);
       dispatch({
         type: ADD_GUEST,
         payload: res.data,

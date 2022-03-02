@@ -57,7 +57,6 @@ const StaffDashboard = () => {
     <>
       <div className="staff__dashboard__container">
         <Navbar />
-
         <div className="staff__dashboard__content">
           <div className="header__details">
             <h2>See what your Dashboard looks like today.</h2>
@@ -76,7 +75,7 @@ const StaffDashboard = () => {
             <SmallCard value={checkedIn} title="CHECKED IN VISITORS" />
             <SmallCard value={prebook} title="PRE BOOKED GUESTS" />
           </div>
-          <div className="chart">
+          <div className="chart" style={{ height: "5%" }}>
             <VerticalChart
               visitors={totalVisitors}
               checkedIn={checkedIn}
