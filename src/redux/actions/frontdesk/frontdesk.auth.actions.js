@@ -7,7 +7,13 @@ import {
   CREATE_FRONT_DESK_FAIL,
   BASE_URL,
 } from "../../constants/constants";
-export const startLogin = (data, toast, navigate, setLoading) => {
+export const startLogin = (
+  data,
+  toast,
+  navigate,
+  setLoading,
+  setFrontLoggedIn
+) => {
   return async (dispatch) => {
     const config = {
       method: "post",
@@ -26,10 +32,11 @@ export const startLogin = (data, toast, navigate, setLoading) => {
 
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data.data,
+        payload: res.data,
       });
       setLoading(false);
       localStorage.setItem("frontdesk", JSON.stringify(res.data));
+      setFrontLoggedIn(JSON.parse(localStorage.getItem("frontdesk")));
       navigate("/frontdesk/dashboard");
     } catch (err) {
       setLoading(false);

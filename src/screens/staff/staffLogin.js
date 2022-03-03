@@ -9,8 +9,10 @@ import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { startStaffLogin } from "../../redux/actions/staff/staff.auth.action";
 import Header from "../../components/Header";
+import StaffLoggedInContext from "../../context/StaffLoggedInContext";
 
 const StaffLogin = () => {
+  const { setstaffLoggedIn } = React.useContext(StaffLoggedInContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = React.useState("");
@@ -22,7 +24,9 @@ const StaffLogin = () => {
     e.preventDefault();
     const data = { email, password };
     setLoading(true);
-    dispatch(startStaffLogin(data, toast, navigate, setLoading));
+    dispatch(
+      startStaffLogin(data, toast, navigate, setLoading, setstaffLoggedIn)
+    );
     setEmail("");
     setPassword("");
   };

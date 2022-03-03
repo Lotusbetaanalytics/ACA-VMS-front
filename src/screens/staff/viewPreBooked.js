@@ -5,27 +5,34 @@ import ShowDataTable from "../../components/Table";
 import { getStaffGuest } from "../../redux/actions/guest/guest.actions";
 import "./staff.css";
 import { Spinner, Select } from "@chakra-ui/react";
+import StaffLoggedInContext from "../../context/StaffLoggedInContext";
+// import { useNavigate } from "react-router-dom";
+
 const ViewPreBookedGuest = () => {
+  const { staffLoggedIn } = React.useContext(StaffLoggedInContext);
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [to, setTo] = React.useState(new Date(Date.now()).toISOString());
   const [from, setFrom] = React.useState(new Date(Date.now()).toISOString());
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const state = useSelector((state) => {
     return state.staffGuests;
   });
 
   React.useEffect(() => {
-    if (state.success) {
+    if (state.success && staffLoggedIn) {
       setData(state.payload.prebook);
       setLoading(false);
     }
-  }, [data, state]);
+  }, [data, state, staffLoggedIn]);
 
   React.useEffect(() => {
-    setLoading(true);
-    dispatch(getStaffGuest(from, to));
-  }, [dispatch, from, to]);
+    if (staffLoggedIn) {
+      setLoading(true);
+      dispatch(getStaffGuest(from, to));
+    }
+  }, [dispatch, from, to, staffLoggedIn]);
 
   const selectHandler = (e) => {
     if (e.target.selectedIndex === 0) {
@@ -47,7 +54,6 @@ const ViewPreBookedGuest = () => {
   return (
     <div className="viewprebook__container">
       <Navbar />
-
       <div className="data__container">
         <div
           className="header__details"
@@ -79,7 +85,9 @@ const ViewPreBookedGuest = () => {
             />
           </div>
         ) : (
-          <ShowDataTable data={data} title="My Pre Booked Guests" />
+          state.success && (
+            <ShowDataTable data={data} title="My Pre Booked Guests" />
+          )
         )}
       </div>
     </div>

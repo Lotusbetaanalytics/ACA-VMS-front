@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Input, useToast } from "@chakra-ui/react";
 import { findStaff } from "../../redux/actions/staff/staff.auth.action";
 import { useDispatch } from "react-redux";
-import { addGuest } from "../../redux/actions/guest/guest.actions";
+import { addDelivery } from "../../redux/actions/guest/guest.actions";
 import { getOffice } from "../../redux/actions/office/office.actions";
 import FilterOffice from "../../components/AutoCompleteOffice";
 import AutoCompleteContext from "../../context/AutoCompleteContext";
@@ -48,7 +48,7 @@ const NewDelivery = () => {
       purpose,
       office: value,
     };
-    dispatch(addGuest(data, toast, setLoading));
+    dispatch(addDelivery(data, toast, setLoading));
     setFullName("");
     setPhone("");
     setCompany("");
@@ -127,7 +127,6 @@ const NewDelivery = () => {
             <Input
               type="text"
               value={fullname}
-              required
               onChange={(e) => {
                 setFullName(e.target.value);
               }}
@@ -159,10 +158,10 @@ const NewDelivery = () => {
           </div>
         </div>
         <div className="staff__information__container">
-          <h2>Staff to see</h2>
+          <h2>Host's Information</h2>
           <div className="staff__information">
             <div>
-              <label htmlFor="">Staff Office</label>
+              <label htmlFor="">Host's Company</label>
               {/* <Input
                 type="text"
                 required
@@ -178,7 +177,7 @@ const NewDelivery = () => {
             </div>
             {show ? (
               <div>
-                <label htmlFor="">Name of Staff</label>
+                <label htmlFor="">Host's Name</label>
                 <Input
                   type="text"
                   value={staffName}

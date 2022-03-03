@@ -9,8 +9,10 @@ import { useDispatch } from "react-redux";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
+import FrontDeskContext from "../../context/FrontDeskLoggedInContext";
 
 const FrontDeskLogin = () => {
+  const { setFrontLoggedIn } = React.useContext(FrontDeskContext);
   const navigate = useNavigate();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -21,7 +23,7 @@ const FrontDeskLogin = () => {
     e.preventDefault();
     const data = { email, password };
     setLoading(true);
-    dispatch(startLogin(data, toast, navigate, setLoading));
+    dispatch(startLogin(data, toast, navigate, setLoading, setFrontLoggedIn));
     setEmail("");
     setPassword("");
   };

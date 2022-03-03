@@ -9,11 +9,13 @@ import {
 import { FaSignOutAlt } from "react-icons/fa";
 import "./Navbar.css";
 import PageTitle from "../PageTitle/PagetitleStaff";
-import { FactCheckTwoTone } from "@mui/icons-material";
-import { InsertInvitationSharp, TimerSharp } from "@material-ui/icons";
+// import { FactCheckTwoTone } from "@mui/icons-material";
+import { InsertInvitationSharp } from "@material-ui/icons";
+import StaffLoggedInContext from "../../context/StaffLoggedInContext";
+
 const Navbar = () => {
   const navigate = useNavigate();
-
+  const { staffLoggedIn } = React.useContext(StaffLoggedInContext);
   const logoutHandler = () => {
     localStorage.removeItem("staff");
     navigate("/staff/login");
@@ -22,13 +24,12 @@ const Navbar = () => {
   const [username, setUserName] = React.useState("");
 
   React.useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("staff"));
-    if (!user) {
-      navigate("/staff/login");
+    if (staffLoggedIn) {
+      setUserName(staffLoggedIn.data.fullname);
     } else {
-      setUserName(user.data.fullname);
+      navigate("/staff/login");
     }
-  }, [navigate]);
+  }, [staffLoggedIn, navigate]);
   return (
     <>
       <PageTitle user={username} />
@@ -56,24 +57,24 @@ const Navbar = () => {
               <h3>PreBook A Guest</h3>
             </div>
           </Link>
-          <Link to="/staff/pending" className="links__prebook">
+          {/* <Link to="/staff/pending" className="links__prebook">
             <div className="link">
               <TimerSharp />
               <h3>My Pending Guests</h3>
             </div>
-          </Link>
-          <Link to="/staff/checkedin" className="links__prebook">
+          </Link> */}
+          {/* <Link to="/staff/checkedin" className="links__prebook">
             <div className="link">
               <FactCheckTwoTone />
               <h3>My Checked In Guests</h3>
             </div>
-          </Link>
-          <Link to="/staff/checkedout" className="links__prebook">
+          </Link> */}
+          {/* <Link to="/staff/checkedout" className="links__prebook">
             <div className="link">
               <FaSignOutAlt />
               <h3>My Checked Out Guests</h3>
             </div>
-          </Link>
+          </Link> */}
           <Link to="/staff/guest" className="links__prebook">
             <div className="link">
               <AiOutlineTeam />

@@ -25,101 +25,139 @@ import PreBookedVisitors from "./screens/FrontDashboard/PreBooked";
 import StaffCheckedOutGuests from "./screens/staff/StaffCheckedOutGuests";
 import StaffCheckedIn from "./screens/staff/StaffCheckedinGuests";
 import StaffPendingGuests from "./screens/staff/StaffPendingGuests";
+import StaffLoggedInContext from "./context/StaffLoggedInContext";
+import FrontDeskContext from "./context/FrontDeskLoggedInContext";
 
 function App() {
   const [value, setValue] = React.useState("");
   const [id, setId] = React.useState("");
+  const [staffLoggedIn, setstaffLoggedIn] = React.useState(
+    JSON.parse(localStorage.getItem("staff"))
+  );
+  const [frontLoggedIn, setFrontLoggedIn] = React.useState(
+    JSON.parse(localStorage.getItem("frontdesk"))
+  );
 
   return (
     <>
-      <AutoCompleteContext.Provider
-        value={{
-          value,
-          setValue,
-          id,
-          setId,
-        }}
-      >
-        <Router>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/frontdesk/login" element={<FrontDeskLogin />} />
-            <Route
-              exact
-              path="/frontdesk/dashboard/visitors"
-              element={<Visitors />}
-            />
-            <Route
-              exact
-              path="/frontdesk/dashboard/pending"
-              element={<PendingVisitors />}
-            />
-            <Route
-              exact
-              path="/frontdesk/dashboard/checkedin"
-              element={<CheckedInVisitors />}
-            />
-            <Route
-              exact
-              path="/frontdesk/dashboard/checkedout"
-              element={<CheckedOutVisitors />}
-            />
+      <FrontDeskContext.Provider value={{ frontLoggedIn, setFrontLoggedIn }}>
+        <StaffLoggedInContext.Provider
+          value={{ staffLoggedIn, setstaffLoggedIn }}
+        >
+          <AutoCompleteContext.Provider
+            value={{
+              value,
+              setValue,
+              id,
+              setId,
+            }}
+          >
+            <Router>
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route
+                  exact
+                  path="/frontdesk/login"
+                  element={<FrontDeskLogin />}
+                />
+                <Route
+                  exact
+                  path="/frontdesk/dashboard/visitors"
+                  element={<Visitors />}
+                />
+                <Route
+                  exact
+                  path="/frontdesk/dashboard/pending"
+                  element={<PendingVisitors />}
+                />
+                <Route
+                  exact
+                  path="/frontdesk/dashboard/checkedin"
+                  element={<CheckedInVisitors />}
+                />
+                <Route
+                  exact
+                  path="/frontdesk/dashboard/checkedout"
+                  element={<CheckedOutVisitors />}
+                />
 
-            <Route
-              exact
-              path="/frontdesk/dashboard/allstaff"
-              element={<AllStaff />}
-            />
-            <Route
-              exact
-              path="/frontdesk/dashboard/allfrontdesk"
-              element={<AllFrontDesk />}
-            />
-            <Route
-              exact
-              path="/frontdesk/dashboard/prebooks"
-              element={<PreBookedVisitors />}
-            />
-            <Route exact path="/logs" element={<Logs />} />
-            <Route exact path="/frontdesk/addoffice" element={<AddOffice />} />
-            <Route exact path="/frontdesk/guest" element={<GuestScreen />} />
-            <Route exact path="/frontdesk/seeguest" element={<ViewGuests />} />
-            <Route path="*" element={<h2>Page Not Found</h2>} />
-            <Route
-              exact
-              path="/frontdesk/register"
-              element={<AddFrontDesk />}
-            />
-            <Route
-              exact
-              path="/frontdesk/dashboard"
-              element={<FrontDeskDashboard />}
-            />
+                <Route
+                  exact
+                  path="/frontdesk/dashboard/allstaff"
+                  element={<AllStaff />}
+                />
+                <Route
+                  exact
+                  path="/frontdesk/dashboard/allfrontdesk"
+                  element={<AllFrontDesk />}
+                />
+                <Route
+                  exact
+                  path="/frontdesk/dashboard/prebooks"
+                  element={<PreBookedVisitors />}
+                />
+                <Route exact path="/logs" element={<Logs />} />
+                <Route
+                  exact
+                  path="/frontdesk/addoffice"
+                  element={<AddOffice />}
+                />
+                <Route
+                  exact
+                  path="/frontdesk/guest"
+                  element={<GuestScreen />}
+                />
+                <Route
+                  exact
+                  path="/frontdesk/seeguest"
+                  element={<ViewGuests />}
+                />
+                <Route path="*" element={<h2>Page Not Found</h2>} />
+                <Route
+                  exact
+                  path="/frontdesk/register"
+                  element={<AddFrontDesk />}
+                />
+                <Route
+                  exact
+                  path="/frontdesk/dashboard"
+                  element={<FrontDeskDashboard />}
+                />
 
-            {/* Staff Routes */}
-            <Route exact path="/staff/dashboard" element={<StaffDashboard />} />
-            <Route exact path="/staff/guest" element={<StaffGuest />} />
-            <Route exact path="/staff/login" element={<StaffLogin />} />
-            <Route exact path="/staff/prebook" element={<Prebook />} />
-            <Route exact path="/staff/checkedin" element={<StaffCheckedIn />} />
-            <Route
-              exact
-              path="/staff/checkedout"
-              element={<StaffCheckedOutGuests />}
-            />
-            <Route
-              exact
-              path="/staff/pending"
-              element={<StaffPendingGuests />}
-            />
-            <Route
-              exact
-              path="/staff/viewprebook"
-              element={<ViewPreBookedGuest />}
-            />
-          </Routes>
-        </Router>
-      </AutoCompleteContext.Provider>
+                {/* Staff Routes */}
+                <Route
+                  exact
+                  path="/staff/dashboard"
+                  element={<StaffDashboard />}
+                />
+                <Route exact path="/staff/guest" element={<StaffGuest />} />
+                <Route exact path="/staff/login" element={<StaffLogin />} />
+                <Route exact path="/staff/prebook" element={<Prebook />} />
+                <Route
+                  exact
+                  path="/staff/checkedin"
+                  element={<StaffCheckedIn />}
+                />
+                <Route
+                  exact
+                  path="/staff/checkedout"
+                  element={<StaffCheckedOutGuests />}
+                />
+                <Route
+                  exact
+                  path="/staff/pending"
+                  element={<StaffPendingGuests />}
+                />
+                <Route
+                  exact
+                  path="/staff/viewprebook"
+                  element={<ViewPreBookedGuest />}
+                />
+              </Routes>
+            </Router>
+          </AutoCompleteContext.Provider>
+        </StaffLoggedInContext.Provider>
+      </FrontDeskContext.Provider>
     </>
   );
 }

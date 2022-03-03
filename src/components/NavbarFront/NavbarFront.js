@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
+// import logo from "../../assets/logo.png";
 import _ from "lodash";
 import {
   AiFillAppstore,
@@ -31,6 +31,10 @@ import { addStaff } from "../../redux/actions/staff/staff.auth.action";
 import PageTitle from "../PageTitle/Pagetitle";
 import "./NavbarFront.css";
 import AutoCompleteContext from "../../context/AutoCompleteContext";
+
+import axios from "axios";
+import { BASE_URL } from "../../redux/constants/constants";
+import FrontDeskContext from "../../context/FrontDeskLoggedInContext";
 const NavbarFront = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [searchResult, setSearch] = React.useState([]);
@@ -41,12 +45,15 @@ const NavbarFront = () => {
   const [password, setPassword] = React.useState("");
   const [mobile, setMobile] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-
+  const [username, setUserName] = React.useState("");
+  const [frontoffice, setFrontOffice] = React.useState("");
   const { frontdesk } = React.useContext(AutoCompleteContext);
+  const { frontLoggedIn } = React.useContext(FrontDeskContext);
   const [isSuperAdmin, setSuperAdmin] = React.useState(null);
   const [superAdminOffice, setSuperAdminOffice] =
     React.useState("Central Office");
   const [staffOffice, setStaffOffice] = React.useState("");
+  const [officeLogo, setOfficeLogo] = React.useState("");
 
   const btnRef = React.useRef();
   const navigate = useNavigate();
@@ -121,19 +128,20 @@ const NavbarFront = () => {
     dispatch(getOffice(e.target.value, setSearch, _));
   };
 
-  const [username, setUserName] = React.useState("");
-  const [frontoffice, setFrontOffice] = React.useState("");
-
   React.useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("frontdesk"));
-    if (!user) {
+    if (!frontLoggedIn) {
       navigate("/");
     } else {
-      setUserName(user.user.firstname);
-      setFrontOffice(user.user.office);
-      setSuperAdmin(user.user.isSuperAdmin);
+      setUserName(frontLoggedIn.user.firstname);
+      setFrontOffice(frontLoggedIn.user.office);
+      setSuperAdmin(frontLoggedIn.user.isSuperAdmin);
     }
-  }, [navigate]);
+  }, [navigate, frontLoggedIn]);
+  React.useEffect(() => {
+    axios.get(`${BASE_URL}/office/search/?q=${frontoffice}`).then((res) => {
+      setOfficeLogo(res.data.data[0].logo);
+    });
+  }, [frontoffice]);
   return (
     <>
       {isSuperAdmin ? (
@@ -141,7 +149,7 @@ const NavbarFront = () => {
           <PageTitle user={username} office={superAdminOffice} />
           <div className="navbar__container">
             <div className="navbar__logo">
-              <img src={logo} alt="ACA" />
+              <img src={officeLogo} alt="ACA" />
             </div>
             <div className="navbar__links">
               <Link to="/frontdesk/dashboard" className="links__dashboard">
@@ -286,7 +294,7 @@ const NavbarFront = () => {
           <PageTitle user={username} office={frontoffice} />
           <div className="navbar__container">
             <div className="navbar__logo">
-              <img src={logo} alt="ACA" />
+              <img src={officeLogo} alt="ACA" />
             </div>
             <div className="navbar__links">
               <Link to="/frontdesk/dashboard" className="links__dashboard">

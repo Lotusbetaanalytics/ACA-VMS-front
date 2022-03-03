@@ -74,7 +74,6 @@ function ViewOffices({ data }) {
   return (
     <>
       <MaterialTable
-        title="All Offices"
         data={data}
         columns={[
           { title: "Office Name", field: "office" },
@@ -89,6 +88,7 @@ function ViewOffices({ data }) {
         options={{
           exportButton: true,
           filtering: true,
+          showTitle: false,
           rowStyle: {},
           headerStyle: {
             backgroundColor: "#009c84",
@@ -101,7 +101,7 @@ function ViewOffices({ data }) {
         style={{
           color: "#000",
           fontFamily: "inherit",
-          padding: "10px",
+          padding: "3px",
           width: "95%",
           marginTop: "60px",
           border: "none",
@@ -111,7 +111,7 @@ function ViewOffices({ data }) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Staff Details</ModalHeader>
+          <ModalHeader>Company Details</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <table>
@@ -120,12 +120,14 @@ function ViewOffices({ data }) {
                 className="guest__table__log"
               >
                 <tr>
-                  <th>Office Name:</th>
+                  <th>Company Name:</th>
                   <td>{object["office"]}</td>
                 </tr>
                 <tr>
-                  <th>Logo:</th>
-                  <td>{object["logo"]}</td>
+                  <th>Company Logo:</th>
+                  <td>
+                    <img src={object["logo"]} alt={object["office"]} />
+                  </td>
                 </tr>
               </tbody>
             </table>

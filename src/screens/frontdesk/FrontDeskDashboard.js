@@ -19,8 +19,10 @@ import {
   getFrontDashboardData,
   getCentralData,
 } from "../../redux/actions/frontdesk/frontdesk.dashboard.actions";
+import FrontDeskContext from "../../context/FrontDeskLoggedInContext";
 
 const Dashboard = () => {
+  const { frontLoggedIn } = React.useContext(FrontDeskContext);
   const [visitorsToday, setVisitors] = useState([]);
   const [allStaff, setAllStaff] = useState([]);
   const [allAdmin, setAllAdmin] = useState([]);
@@ -35,14 +37,13 @@ const Dashboard = () => {
     new Date(Date.now()).toISOString()
   );
 
-  console.log(new Date(Date.now()).toISOString());
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return state.frontDashboard;
   });
 
   React.useEffect(() => {
-    if (state.success) {
+    if (state.success && frontLoggedIn) {
       setPending(state.payload.pendingGuests);
       setVisitors(state.payload.Guests);
       setCheckedIn(state.payload.checkedIn);
@@ -51,19 +52,30 @@ const Dashboard = () => {
       setPreBookedGuests(state.payload.prebooks);
       setAllAdmin(state.payload.admin);
     }
-  }, [state]);
+  }, [state, frontLoggedIn]);
 
   //identify current frontdesk
-  React.useEffect(() => {
-    const typeofFrontDesk = JSON.parse(localStorage.getItem("frontdesk")).user
-      .isSuperAdmin;
 
-    if (typeofFrontDesk) {
+  React.useEffect(() => {
+    if (frontLoggedIn && frontLoggedIn.user.isSuperAdmin) {
       dispatch(getCentralData(fromQueryDate, toQueryDate));
-    } else {
+    }
+  }, [fromQueryDate, toQueryDate, dispatch, frontLoggedIn]);
+  React.useEffect(() => {
+    if (frontLoggedIn && !frontLoggedIn.user.isSuperAdmin) {
       dispatch(getFrontDashboardData(fromQueryDate, toQueryDate));
     }
-  }, [dispatch, fromQueryDate, toQueryDate]);
+  }, [fromQueryDate, toQueryDate, dispatch, frontLoggedIn]);
+
+  // React.useEffect(() => {
+  //   if (!typeofFrontDesk) {
+  //     navigate("/");
+  //   } else if (typeofFrontDesk.user.isSuperAdmin) {
+  //     dispatch(getCentralData(fromQueryDate, toQueryDate));
+  //   } else if (!typeofFrontDesk.user.isSuperAdmin) {
+  //     dispatch(getFrontDashboardData(fromQueryDate, toQueryDate));
+  //   }
+  // }, [dispatch, fromQueryDate, toQueryDate, typeofFrontDesk, navigate]);
 
   const onChangeHandler = (e) => {
     if (e.target.selectedIndex === 0) {
@@ -162,9 +174,9 @@ const Dashboard = () => {
           <div
             className="chart"
             style={{
-              width: "20%",
+              width: "65%",
               position: "relative",
-              left: "40%",
+              left: "20%",
               top: "10%",
             }}
           >

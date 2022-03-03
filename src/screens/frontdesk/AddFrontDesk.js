@@ -19,6 +19,7 @@ const AddFrontDesk = () => {
   const [role, setRole] = React.useState(false);
   const [password, setPassword] = React.useState("");
   const [office, setOffice] = React.useState("");
+  const [mobile, setMobile] = React.useState("");
   const [officeSearch, setOfficeSearch] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
@@ -26,7 +27,6 @@ const AddFrontDesk = () => {
     e.preventDefault();
     const data = { firstname, lastname, email, role, password, office: value };
     setLoading(true);
-    console.log(data);
     dispatch(createFrontDesk(data, toast, setLoading));
     setFirstName("");
     setLastName("");
@@ -65,6 +65,17 @@ const AddFrontDesk = () => {
               required
               onChange={(e) => {
                 setLastName(e.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <label htmlFor="">Mobile Number</label>
+            <Input
+              placeholder="Type Mobile Number..."
+              value={mobile}
+              required
+              onChange={(e) => {
+                setMobile(e.target.value);
               }}
             />
           </div>

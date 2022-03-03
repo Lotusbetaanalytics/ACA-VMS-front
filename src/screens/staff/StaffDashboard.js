@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import SmallCard from "../../components/Cards/SmallCard";
 import Navbar from "../../components/Navbar/Navbar";
 import "./staff.css";
@@ -6,8 +6,11 @@ import { Select } from "@chakra-ui/react";
 import { getStaffGuest } from "../../redux/actions/guest/guest.actions";
 import { useDispatch, useSelector } from "react-redux";
 import VerticalChart from "../../components/Chart/VerticalBarChart";
+// import { useNavigate } from "react-router-dom";
+import StaffLoggedInContext from "../../context/StaffLoggedInContext";
 
 const StaffDashboard = () => {
+  const { staffLoggedIn } = useContext(StaffLoggedInContext);
   const [to, setTo] = useState(new Date(Date.now()).toISOString());
   const [from, setFrom] = useState(new Date(Date.now()).toISOString());
   const [totalVisitors, setTotalVisitors] = useState(null);
@@ -15,6 +18,7 @@ const StaffDashboard = () => {
   const [prebook, setPrebook] = useState(null);
   const [title, setTitle] = useState("");
 
+  // const navigate = useNavigate();
   const selectHandler = (e) => {
     if (e.target.selectedIndex === 0) {
       setTitle("Today");
@@ -42,16 +46,24 @@ const StaffDashboard = () => {
   });
 
   useEffect(() => {
-    if (state.success) {
+    if (state.success && staffLoggedIn) {
       setTotalVisitors(state.payload.guest.length);
       setCheckedIn(state.payload.checkedIn.length);
       setPrebook(state.payload.prebook.length);
     }
-  }, [state]);
+  }, [state, staffLoggedIn]);
 
   useEffect(() => {
-    dispatch(getStaffGuest(from, to));
-  }, [dispatch, from, to]);
+    staffLoggedIn && dispatch(getStaffGuest(from, to));
+  }, [dispatch, from, to, staffLoggedIn]);
+
+  //check if user is logged in
+
+  // useEffect(() => {
+  //   if (!staffLoggedIn) {
+  //     navigate("/staff/login");
+  //   }
+  // }, [staffLoggedIn, navigate]);
 
   return (
     <>

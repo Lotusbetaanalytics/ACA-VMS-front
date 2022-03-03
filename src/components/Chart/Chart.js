@@ -1,10 +1,25 @@
 import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
-ChartJS.register(ArcElement, Tooltip);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-export default function DoughChart(props) {
+export default function VerticalChart(props) {
   const data = {
     labels: [
       "Visitors Today",
@@ -15,6 +30,8 @@ export default function DoughChart(props) {
     ],
     datasets: [
       {
+        label: "Visitors Today",
+
         data: [
           props.visitors,
           props.pending,
@@ -27,5 +44,16 @@ export default function DoughChart(props) {
       },
     ],
   };
-  return <Doughnut data={data} />;
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: false,
+      },
+    },
+  };
+  return <Bar options={options} data={data} />;
 }

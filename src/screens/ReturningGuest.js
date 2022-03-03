@@ -30,10 +30,10 @@ const ReturningGuest = () => {
 
   return (
     <div>
-      <label htmlFor="">Enter Guest Number</label>
+      <label htmlFor="">Enter Guest Phone Number</label>
       <form className="verify__token" onSubmit={clickHandler}>
         <Input
-          placeholder="Enter Guest Number"
+          placeholder="Guest Phone Number"
           value={search}
           required
           onChange={(e) => {
@@ -69,7 +69,7 @@ const ReturningGuest = () => {
                   <div className="guest__photo">
                     <img src={guest.photo} alt="" />
                   </div>
-                  <Button>CheckIn Guest</Button>
+                  <Button>Check In Guest</Button>
                 </form>
               );
             })

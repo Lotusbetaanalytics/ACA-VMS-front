@@ -9,7 +9,13 @@ import {
   FIND_STAFF_FAIL,
   BASE_URL,
 } from "../../constants/constants";
-export const startStaffLogin = (data, toast, navigate, setLoading) => {
+export const startStaffLogin = (
+  data,
+  toast,
+  navigate,
+  setLoading,
+  setstaffLoggedIn
+) => {
   return async (dispatch) => {
     const config = {
       method: "post",
@@ -32,6 +38,7 @@ export const startStaffLogin = (data, toast, navigate, setLoading) => {
       });
       setLoading(false);
       localStorage.setItem("staff", JSON.stringify(res.data));
+      setstaffLoggedIn(JSON.parse(localStorage.getItem("staff")));
       navigate("/staff/dashboard");
     } catch (err) {
       dispatch({
@@ -41,7 +48,7 @@ export const startStaffLogin = (data, toast, navigate, setLoading) => {
       setLoading(false);
       toast({
         title: "An error Occured!",
-        description: `${err.message || err.response.data.message}`,
+        description: `${err.response.data.message || err.message}`,
         status: "error",
         duration: 9000,
         isClosable: true,

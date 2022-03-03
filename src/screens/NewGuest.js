@@ -220,7 +220,18 @@ const NewGuest = () => {
             />
           </div>
           <div>
-            <label htmlFor="">Part of a Group?</label>
+            <label htmlFor="">Tag Number</label>
+            <Input
+              type="text"
+              value={email}
+              required
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </div>
+          {/* <div>
+            <label htmlFor="">Tag</label>
             <Select
               onChange={(e) => {
                 setIsGroup(e.target.value);
@@ -229,7 +240,7 @@ const NewGuest = () => {
               <option value={false}>No</option>
               <option value={true}>Yes</option>
             </Select>
-          </div>
+          </div> */}
           <div className="takephoto">
             <div className="visitor__photo">
               <Button
@@ -258,10 +269,10 @@ const NewGuest = () => {
           </div>
         </div>
         <div className="staff__information__container">
-          <h2>Staff to see</h2>
+          <h2>Host Details</h2>
           <div className="staff__information">
             <div>
-              <label htmlFor="">Staff Office</label>
+              <label htmlFor="">Host's Company</label>
               {/* <Input
                 type="text"
                 required
@@ -277,7 +288,7 @@ const NewGuest = () => {
             </div>
             {show ? (
               <div>
-                <label htmlFor="">Name of Staff</label>
+                <label htmlFor="">Host's Name</label>
                 <Input
                   type="text"
                   value={staffName}
